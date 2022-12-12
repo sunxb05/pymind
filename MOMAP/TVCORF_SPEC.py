@@ -38,6 +38,6 @@ def Temp(float):
 
     Example:
 
-        >>> &control
-        >>>     Temp      = 298 K    
+        &control
+             Temp      = 298 K    
     """
