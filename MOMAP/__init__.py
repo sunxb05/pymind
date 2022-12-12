@@ -1,4 +1,4 @@
-"""Documentation about pymind"""
+"""Documentation about MOMAP"""
 import logging
 
 

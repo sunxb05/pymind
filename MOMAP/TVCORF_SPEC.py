@@ -1,16 +1,17 @@
-"""Documentation about the pymind module."""
+"""Documentation about the MOMAP module."""
 
 
-# FIXME: put actual code here
 def DUSHIN():
     """是否开启 Duschinsky 转动效应的计算
+
+    Args:
+        .t. or .f. (logic)
 
     Default: .t.
 
     Example:
-        This function can be called with `Jane Smith` as argument using
 
         &control
-          DUSHIN      = .t.        
+        DUSHIN      = .t.        
 
     """
