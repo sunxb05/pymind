@@ -12,7 +12,7 @@ def do_evc(int):
     """
 
 def ffreq(str):
-    """基态或激发态结果的日志文件
+    """定义读取的基态或激发态结果的日志文件，可由Gaussian等软件计算得到
 
     Args:
         “s0.log” (Default)
@@ -24,7 +24,7 @@ def ffreq(str):
     """
 
 def fnacme(str):
-    """非绝热耦合文件
+    """定义读取的非绝热耦合矩阵元文件，可由Gaussian等软件计算得到，用于内转换计算
 
     Args:
         “nacme.log” (Default)
@@ -32,4 +32,26 @@ def fnacme(str):
     Example:
         >>> &evc
         >>>     fnacme = "azulene-nacme.log"      
+    """
+
+def ftdipd(str):
+    """定义读取的numfreq计算文件，用于Herzberg-Teller 效应的计算
+
+    Args:
+        “numfreq-es.out” (Default)
+
+    Example:
+        >>> &evc
+        >>>     fnacme = "numfreq-es.out"      
+    """
+
+def sort_mode(int):
+    """用于Herzberg-Teller效应的计算
+
+    Args:
+        1 (Default): 0
+
+    Example:
+        >>> &evc
+        >>>     sort_mode      = 1      
     """

@@ -1,7 +1,7 @@
 """Documentation about the MOMAP module."""
 
-def do_ic_tvcf_ft(int):
-    """表示开启计算荧光关联函数, 1表示开启，0表示关闭
+def do_spec_tvcf_ft(int):
+    """是否开启计算辐射关联函数, 1表示开启，0表示关闭
 
     Args:
         1 (Default): 0
@@ -11,14 +11,56 @@ def do_ic_tvcf_ft(int):
     """
 
 def do_spec_tvcf_spec(int):
-    """表示开启计算荧光光谱, 1表示开启，0表示关闭
+    """是否开启计算辐射光谱, 1表示开启，0表示关闭
 
     Args:
         1 (Default): 0
 
     Example:
-        >>>     do_spec_tvcf_ft      = 1      
+        >>>     do_spec_tvcf_spec      = 1      
     """
+
+def do_ic_tvcf_ft(int):
+    """是否开启计算内转换关联函数, 1表示开启，0表示关闭
+
+    Args:
+        1 (Default): 0
+
+    Example:
+        >>>     do_ic_tvcf_ft      = 1      
+    """
+
+def do_ic_tvcf_spec(int):
+    """是否开启计算内转换光谱, 1表示开启，0表示关闭
+
+    Args:
+        1 (Default): 0
+
+    Example:
+        >>>     do_ic_tvcf_spec      = 1      
+    """
+
+
+def do_isc_tvcf_ft(int):
+    """是否开启计算系间窜越关联函数, 1表示开启，0表示关闭
+
+    Args:
+        1 (Default): 0
+
+    Example:
+        >>>     do_isc_tvcf_ft      = 1      
+    """
+
+def do_isc_tvcf_spec(int):
+    """是否开启计算系间窜越光谱, 1表示开启，0表示关闭
+
+    Args:
+        1 (Default): 0
+
+    Example:
+        >>>     do_isc_tvcf_spec      = 1      
+    """
+
 
 def DUSHIN(logic):
     """是否开启 Duschinsky t表示开启，f表示关闭
@@ -43,7 +85,7 @@ def HERZ(logic):
     """
 
 def Ead(float):
-    """ 绝热激发能
+    """ 绝热激发能，可由Gaussian等软件计算得到
 
     Args:
         0.05 (Default)
@@ -55,7 +97,7 @@ def Ead(float):
     """
 
 def EDMA(float):
-    """ 吸收跃迁偶极矩
+    """ 吸收跃迁偶极矩，可由Gaussian等软件计算得到
 
     Args:
         0.05 (Default)
@@ -67,7 +109,7 @@ def EDMA(float):
     """
 
 def EDME(float):
-    """ 发射跃迁偶极矩
+    """ 发射跃迁偶极矩，可由Gaussian等软件计算得到
 
     Args:
         0.05 (Default)
@@ -77,6 +119,19 @@ def EDME(float):
         >>> &spec_tvcf
         >>>     EDME      = 0.64751 debye   
     """
+
+def Hso(float):
+    """ 旋轨耦合常数，可由Dalton等软件计算得到，用于系间窜越计算
+
+    Args:
+        100 (Default)
+ 
+
+    Example:
+        >>> &isc_tvcf
+        >>>     Hso      = 116.877376 cm-1   
+    """
+
 
 def Temp(float):
     """ 定义温度
@@ -91,7 +146,7 @@ def Temp(float):
     """
 
 def tmax(float):
-    """ 积分时间
+    """ 定义积分时间
 
     Args:
         1000 (Default)
@@ -103,7 +158,7 @@ def tmax(float):
     """
 
 def dt(float):
-    """ 积分步长
+    """ 定义积分步长
 
     Args:
         0.01 (Default)
@@ -139,19 +194,6 @@ def dE(float):
         >>>     dE      = 0.00001 au   
     """
 
-def FreqScale(float):
-    """ 频率缩放因子
-
-    Args:
-        1.0 (Default)
- 
-
-    Example:
-        >>> &spec_tvcf
-        >>>     FreqScale      = 1.0  
-    """
-
-
 def DSFile(str):
     """定义读取的 evc 文件名
 
@@ -163,6 +205,27 @@ def DSFile(str):
         >>>     DSFile = "evc.cart.dat"      
     """
 
+def CoulFile(str):
+    """定义读取的nacme文件名，
+
+    Args:
+        "evc.cart.nac" (Default)
+
+    Example:
+        >>> &ic_tvcf
+        >>>     CoulFile = "evc.cart.nac"      
+    """
+
+def DDplFile(str):
+    """定义读取的 dip 文件名,用于Herzberg-Teller效应计算
+
+    Args:
+        "evc.cart.dip" (Default)
+
+    Example:
+        >>> &spec_tvcf
+        >>>     evc.cart.dip = "evc.cart.dip"      
+    """
 
 def logFile(str):
     """定义输出 log 文件名
@@ -189,7 +252,7 @@ def FtFile(str):
 
 
 def FoFile(str):
-    """谱函数输出文件
+    """定义输出的谱函数输出文件名
 
     Args:
         "spec.tvcf.fo.dat" (Default)
@@ -201,7 +264,7 @@ def FoFile(str):
 
 
 def FoSFile(str):
-    """归一化的光谱输出文件
+    """定义输出的归一化的光谱输出文件名
 
     Args:
         "spec.tvcf.spec.dat" (Default)
