@@ -27,7 +27,7 @@ def HERZ(logic):
 
     """
 
-def Temp(float K):
+def Temp(float):
     """ 定义温度
 
     Args:
