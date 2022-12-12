@@ -1,15 +1,13 @@
 """Documentation about the MOMAP module."""
 
 
-def DUSHIN():
+def DUSHIN(logic):
     """是否开启 Duschinsky 转动效应的计算
 
     Args:
-        .t. (logic): .f. 
+        .t. (Default): .f. 
 
-    Default: .t.
-
-    Example:
+    Usage:
 
         &control
             DUSHIN      = .t.        
