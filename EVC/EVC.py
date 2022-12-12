@@ -23,3 +23,13 @@ def ffreq(str):
         >>>     ffreq(2) = "azulene-s1.log"        
     """
 
+def fnacme(str):
+    """非绝热耦合文件
+
+    Args:
+        “nacme.log” (Default)
+
+    Example:
+        >>> &evc
+        >>>     fnacme = "azulene-nacme.log"      
+    """
