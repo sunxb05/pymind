@@ -10,6 +10,13 @@ Welcome to MOMAP's documentation!
   :maxdepth: 2
   :caption: Contents:
 
+
+  includeme
+  install
+
+
+
+
 Indices and tables
 ==================
 
