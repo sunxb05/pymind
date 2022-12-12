@@ -11,7 +11,6 @@ Welcome to MOMAP's documentation!
   :caption: Contents:
 
 
-  includeme
   install
 
 
