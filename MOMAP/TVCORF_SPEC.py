@@ -8,9 +8,9 @@ def DUSHIN(logic):
         .t. (Default): .f. 
 
     Usage:
-    
-        >>> DUSHIN      = .t.        
 
+        &control
+            DUSHIN      = .t.        
     """
 
 def HERZ(logic):
@@ -21,8 +21,8 @@ def HERZ(logic):
 
     Usage:
 
-        >>> HERZ      = .f.        
-
+        &control
+            HERZ      = .f.        
     """
 
 def Temp(float):
@@ -32,6 +32,7 @@ def Temp(float):
         298 (Default)
 
     Usage:
-        >>> Temp      = 298 K       
 
+        &control
+            Temp      = 298 K       
     """
