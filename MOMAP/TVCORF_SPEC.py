@@ -37,9 +37,7 @@ def Temp(float):
             Temp      = 298 K    
 
     Example:
-        This function can be called with `Jane Smith` as argument using
 
-        >>> from pymind.my_module import hello
-        >>> hello('Jane Smith')
-        'Hello Jane Smith!'   
+        >>> &control
+        >>>     Temp      = 298 K    
     """
