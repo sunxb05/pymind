@@ -31,7 +31,7 @@ def Temp(float):
     """ 定义温度
 
     Args:
-        .298 K. (Default)
+        298 K (Default)
 
     Usage:
 
