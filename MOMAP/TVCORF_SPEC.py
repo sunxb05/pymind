@@ -8,9 +8,8 @@ def DUSHIN(logic):
         .t. (Default): .f. 
 
     Usage:
-
-        &control
-            DUSHIN      = .t.        
+    
+        >>> DUSHIN      = .t.        
 
     """
 
@@ -22,8 +21,7 @@ def HERZ(logic):
 
     Usage:
 
-        &control
-            HERZ      = .f.        
+        >>> HERZ      = .f.        
 
     """
 
@@ -31,11 +29,9 @@ def Temp(float):
     """ 定义温度
 
     Args:
-        298 K (Default)
+        298 (Default)
 
     Usage:
-
-        &control
-            Temp      = 298 K       
+        >>> Temp      = 298 K       
 
     """
