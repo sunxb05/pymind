@@ -1,36 +1,25 @@
 """Documentation about the EVC module."""
 
 
-def DUSHIN(logic):
-    """是否开启 Duschinsky 转动效应的计算
+def do_evc(int):
+    """是否开启dushin计算, 1表示开启，0表示关闭
 
     Args:
-        .t. (Default): .f. 
+        1 (Default): 0 
 
     Example:
-        >>> &control
-        >>>     DUSHIN      = .t.        
+        >>>     do_evc      =  1      
     """
 
-def HERZ(logic):
-    """是否开启 Herzberg-Teller 效应的计算
+def ffreq(str):
+    """基态或激发态结果的日志文件
 
     Args:
-        .f. (Default): .t. 
+        “s0.log” (Default)
 
     Example:
-        >>> &control
-        >>>     HERZ      = .f.        
+        >>> &evc
+        >>>     ffreq(1) = "azulene-s0.log"
+        >>>     ffreq(2) = "azulene-s1.log"        
     """
 
-def Temp(float):
-    """ 定义温度
-
-    Args:
-        298 (Default)
- 
-
-    Example:
-        >>> &control
-        >>>     Temp      = 298 K    
-    """
