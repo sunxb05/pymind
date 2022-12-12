@@ -1,5 +1,5 @@
-安装
-=====
+Installation
+============
 
 Activation Strain Analysis (ASA) Module of PyFrag 2019
 ------------------------------------------------------
