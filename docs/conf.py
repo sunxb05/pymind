@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = u"pymind"
+project = u"MOMAP"
 copyright = u"2021, Xiaobo Sun"
 author = u"Xiaobo Sun"
 
@@ -29,7 +29,7 @@ author = u"Xiaobo Sun"
 version = "0.1.0"
 # The full version, including alpha/beta/rc tags.
 release = version
-
+needs_sphinx = '2.1'
 # -- General configuration ------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
@@ -60,7 +60,7 @@ todo_include_todos = False
 
 # -- Use autoapi.extension to run sphinx-apidoc -------
 
-autoapi_dirs = ['../pymind']
+autoapi_dirs = ['../MOMAP']
 
 # -- Options for HTML output ----------------------------------------------
 
