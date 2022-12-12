@@ -79,7 +79,7 @@ html_sidebars = {
 
 # -- Use autoapi.extension to run sphinx-apidoc -------
 
-autoapi_dirs = ['../MOMAP']
+autoapi_dirs = ['../MOMAP','../EVC']
 
 # -- Options for HTML output ----------------------------------------------
 
