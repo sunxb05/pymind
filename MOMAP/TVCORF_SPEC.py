@@ -1,4 +1,4 @@
-"""Documentation about the TVCORF_SPEC module."""
+"""Documentation about the pymind module."""
 
 
 # FIXME: put actual code here
