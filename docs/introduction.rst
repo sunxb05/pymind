@@ -1,69 +1,30 @@
-安装
-============
+软件概括
+=======
 
-Activation Strain Analysis (ASA) Module of PyFrag 2019
+MOMAP(MOlecular MAterials Property Prediction Package)
 ------------------------------------------------------
-The user may choose to only install the part of the program needed to perform the Activation Strain Analysis (ASA) based on Activation Strain Model (ASM). Note that Python3 is needed to run this program. The ASA can be performed using a variety of quantum chemical software packages, including:  ADF_, Gaussian_, Orca_ and Turbomole_, given a series of coordinate from the potential energy surface is provided.
-
-To install the ASA module of PyFrag 2019, the user must complete the following step. Go to your host machine (supercomputer or cluster), open a terminal and run the following command:
-
-``curl -L -o install_alone.sh https://raw.githubusercontent.com/sunxb05/PyFrag/master/install_alone.sh``
-
-``bash install_alone.sh``
-
-To run a simple test, open a terminal window on your host machine, make a directory, enter into that directory and run the following command to download the job input file (job.in) and coordinate file (molecule.xyz):
-
-``curl -L -o job.in``
-``https://raw.githubusercontent.com/sunxb05/PyFrag/master/host/standalone/adf_new/example/job.in``
-
-``curl -L -o molecule.xyz``
-``https://raw.githubusercontent.com/sunxb05/PyFrag/master/host/standalone/adf_new/example/molecule.xyz``
-
-Change the ircpath and the submit information, such as the number of nodes and wall time, located in job.in using vim or any other text editor according to your situation, and run:
-
-``pyfrag job.in``
-
-The user can also download the module for either ADF, Gaussian, Orca, and Turbomole separately from PyFrag standalone_ and run it as a normal python code in your laptop or desktop. An input sample is provided in the example folder along with the source code file.
+MOMAP(MOlecular MAterials Property Prediction Package)是一套从理论 上分析、预测有机分子材料光电性能的软件，由清华大学帅志刚教授课题组_、中国科学院化学研究所有机固体实验室理论组和鸿 之微科技(上海)股份有限公司_ 联合开发完成。MOMAP 涵盖了从分子激发态的 结构到速率过程、多类材料的电荷迁移率和热电优质、光伏材料的光电流-电压 与功率转换效率等性能的计算预测。目前 MOMAP 的主要功能包括分子发光性能以及电荷输运性能的理论计算。
 
 
-The Complete PyFrag 2019 Package
---------------------------------
-The entire PyFrag 2019 package is only compatible with ADF at the moment. . For optimal use of PyFrag 2019, one part of the program is installed on the users’ local machine and the second part is installed on the users’ host machine (supercomputer or cluster) where the heavy computational jobs is running. The user must ensure to transport their public key to your host machine to allow the communication between your local and host machine. The following installation bash script (install_local.sh, install_host.sh) is was designed to make the installation process as simple as possible. However, for the advanced user, if a different configuration of the program is desired, please read the detailed comments in the installation bash script and set up the program accordingly.
-To install and test PyFrag 2019, the user must perform the following three steps:
+发光性能
+-------
+分子发光效率决定于辐射和无辐射弛豫过程的竞争。对于光谱、辐射速率和 无辐射速率的计算，其难点在于处理基态与激发态之间的电子-振动耦合，以及由此所引起平衡位形的变化(决定正则模式位移、黄昆因子、重整能大小)和振动模式之间的转动效应(DuschinskyRotation Effect, DRE)。传统的位移谐 振子模型忽略了正则模式之间的模式转动效应，很难准确定量分析与预测分子的 发光效率。我们的工作建立在简谐近似的基础上，同时全面地考虑了不同势能面 之间的正则模式位移与模式转动效应，将非绝热耦合和自旋-轨道耦合作为微扰，推导了基于热振动关联函数的光谱、辐射与无辐射速率的解析表达式。针对弱发 光体系，我们考虑了分子跃迁偶极矩随振动位形的变化的效应，将跃迁偶极矩泰勒展开到一阶项，推导出基于热振动关联函数的 Herzberg-Teller光谱公式。以上 理论公式中所需要的参数，均可以通过现代量子化学计算程序得到，不需要任何人为的参数。结合辐射速率与无辐射速率的计算结果，能够完全从理论上定量预 测和分析有机分子材料的发光效率。
+
+对于分子的发光性能，MOMAP主要能够基于第一性原理计算的结果(包括基态、激发态的平衡位形、振动频率和振动模式)，在一阶微扰和费米黄金规则基础上，以及热振动关联函数的理论框架下，计算考虑 Herzberg-Teller 效应的分子吸收、荧光光谱、磷光光谱、辐射速率、内转换速率、 系间窜越速率[1-5]。在计算光谱和速率之前，首先要通过其他量化软件优化分子 基态、激发态的平衡构型，并计算相应构型下的跃迁偶极矩及其导数、非绝热耦 合向量、自旋轨道耦合常数以及振动频率和振动正则模式。根据 Franck-Condon 原理，电子态跃迁瞬时，原子核位形不变，由此得到基态和激发态正则模式之间 的关系表达式为:
+
+``Qe = S * Qg + D``
+
+其中 Qg， Qe 分别为基态和激发态的正则坐标，S 为 Duschinsky 转动矩阵，D 为模式位移。根据计算得到的 S 和 D，以及绝热激发能、跃迁偶极矩、非绝热耦合向量和自旋轨道耦合常数等参数，可以进一步计算各个光谱和速率的热振动关 联函数 ρ(t,T)，其中 t 为演化时间，T 为温度。对热振动关联函数进行傅里叶变换，就可以得到吸收、发射光谱和无辐射跃迁的谱函数。辐射速率即等于发射光谱对频率的积分。而无辐射速率即为无辐射谱函数的自变量为“绝热激发能”时的取值。
 
 
-1) Go to your local machine (your laptop or desktop), open a terminal window and run the following command on your terminal:
 
-``xcode-select --install``
-
-``curl -L -o install_local.sh https://raw.githubusercontent.com/sunxb05/PyFrag/master/install_local.sh``
-
-``bash install_local.sh``
+电荷输运
+-------
+在载流子输运方面，分子晶体的堆积方式决定了近邻分子之间的电荷转移积分和载流子迁移的网络拓扑结构。我们在给定分子晶体位形的基础上，基于量子化学程序包计算得到的近邻分子间的电荷转移积分，采取 Marcus 公式以及核隧穿方法，在电荷随机行走的理论框架下，采用蒙特卡罗统计方法，综合考虑了近邻载流子转移速率和分子网络拓扑结构效应，发展了一套分子晶体载流子迁移率的理论计算程序，为分子材料载流子输运性能分析提供强有力的理论工具。
+MOMAP软件首先构建分子晶体超包，并计算最近邻分子之间的电荷转移积分，基于Marcus公式以及核隧穿方法计算载流子迁移速率，再根据此速率，在电荷随机游走的理论框架下，采用模特卡罗统计方法，计算材料各方向上的迁移率.
 
 
-2) Go to your host machine (supercomputer or cluster), open a terminal window and run the following command:
-
-``curl -L -o install_host.sh https://raw.githubusercontent.com/sunxb05/PyFrag/master/install_host.sh``
-
-``bash install_host.sh``
-
-3)  Open a terminal window on your local machine, make a directory, enter into that directory and run the following command:
-
-``curl -L -o job.in https://raw.githubusercontent.com/sunxb05/PyFrag/master/example/job.in``
-
-Change the submit information, such as the number of nodes and wall time, located in job.in using vim or any other text editor, and run:
-
-``pyfrag job.in``
-
-To obtain the latest information about your job, the user can run:
-
-``pyfrag -x summary job.in``
 
 
-.. _PyFrag 2008: http://www.few.vu.nl/~xsn800/Home.html
-.. _standalone: https://github.com/sunxb05/PyFrag/tree/master/host/standalone
-.. _PyFrag 2019: https://sunxb05.github.io/pyfrag/
-.. _Gaussian:   http://gaussian.com
-.. _ADF:       https://www.scm.com
-.. _Orca:      http://www.orcahome.de/orcanews.htm
-.. _Turbomole: http://www.turbomole.com
+.. _清华大学帅志刚教授课题组: http://www.shuaigroup.net/
+.. _股份有限公司: https://iresearch.net.cn
