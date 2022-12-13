@@ -1,69 +1,137 @@
-安装
-============
+软件安装
+=======
 
-Activation Strain Analysis (ASA) Module of PyFrag 2019
-------------------------------------------------------
-The user may choose to only install the part of the program needed to perform the Activation Strain Analysis (ASA) based on Activation Strain Model (ASM). Note that Python3 is needed to run this program. The ASA can be performed using a variety of quantum chemical software packages, including:  ADF_, Gaussian_, Orca_ and Turbomole_, given a series of coordinate from the potential energy surface is provided.
-
-To install the ASA module of PyFrag 2019, the user must complete the following step. Go to your host machine (supercomputer or cluster), open a terminal and run the following command:
-
-``curl -L -o install_alone.sh https://raw.githubusercontent.com/sunxb05/PyFrag/master/install_alone.sh``
-
-``bash install_alone.sh``
-
-To run a simple test, open a terminal window on your host machine, make a directory, enter into that directory and run the following command to download the job input file (job.in) and coordinate file (molecule.xyz):
-
-``curl -L -o job.in``
-``https://raw.githubusercontent.com/sunxb05/PyFrag/master/host/standalone/adf_new/example/job.in``
-
-``curl -L -o molecule.xyz``
-``https://raw.githubusercontent.com/sunxb05/PyFrag/master/host/standalone/adf_new/example/molecule.xyz``
-
-Change the ircpath and the submit information, such as the number of nodes and wall time, located in job.in using vim or any other text editor according to your situation, and run:
-
-``pyfrag job.in``
-
-The user can also download the module for either ADF, Gaussian, Orca, and Turbomole separately from PyFrag standalone_ and run it as a normal python code in your laptop or desktop. An input sample is provided in the example folder along with the source code file.
+Download MOMAP 
+--------------
 
 
-The Complete PyFrag 2019 Package
---------------------------------
-The entire PyFrag 2019 package is only compatible with ADF at the moment. . For optimal use of PyFrag 2019, one part of the program is installed on the users’ local machine and the second part is installed on the users’ host machine (supercomputer or cluster) where the heavy computational jobs is running. The user must ensure to transport their public key to your host machine to allow the communication between your local and host machine. The following installation bash script (install_local.sh, install_host.sh) is was designed to make the installation process as simple as possible. However, for the advanced user, if a different configuration of the program is desired, please read the detailed comments in the installation bash script and set up the program accordingly.
-To install and test PyFrag 2019, the user must perform the following three steps:
+First download the MOMAP package from MOMAP website_, by simply clicking the related link or DOWNLOAD button to download the file.
 
 
-1) Go to your local machine (your laptop or desktop), open a terminal window and run the following command on your terminal:
+Install MOMAP for Linux
+-----------------------
 
-``xcode-select --install``
+The MOMAP package for Linux is downloaded as a single zipped installable run file, e.g.,
 
-``curl -L -o install_local.sh https://raw.githubusercontent.com/sunxb05/PyFrag/master/install_local.sh``
+    momap-2022B-linux-el7-openmpi.run.gz
 
-``bash install_local.sh``
+Unzip the file and add executable attribute to the file, and install MOMAP by running:
 
+``gunzip momap-2022B-linux-el7-openmpi.run.gz``
+``chmod a+x momap-2022B-linux-el-openmpi.run``
+``./momap-2022B-linux-el7-openmpi.run``
 
-2) Go to your host machine (supercomputer or cluster), open a terminal window and run the following command:
+The default installation folder is ``$HOME/MOMAP-2022B``, however, one can change the target installation folder in the installation process.
 
-``curl -L -o install_host.sh https://raw.githubusercontent.com/sunxb05/PyFrag/master/install_host.sh``
+Before using MOMAP, one should first set up the running environment by adding the following line to ``~/.bashrc`` if Bash is used
 
-``bash install_host.sh``
+``. <installed_momap_folder>/env.sh``
 
-3)  Open a terminal window on your local machine, make a directory, enter into that directory and run the following command:
-
-``curl -L -o job.in https://raw.githubusercontent.com/sunxb05/PyFrag/master/example/job.in``
-
-Change the submit information, such as the number of nodes and wall time, located in job.in using vim or any other text editor, and run:
-
-``pyfrag job.in``
-
-To obtain the latest information about your job, the user can run:
-
-``pyfrag -x summary job.in``
+Log out and log back in again for it to take effect, then we can proceed to run MOMAP.
 
 
-.. _PyFrag 2008: http://www.few.vu.nl/~xsn800/Home.html
-.. _standalone: https://github.com/sunxb05/PyFrag/tree/master/host/standalone
-.. _PyFrag 2019: https://sunxb05.github.io/pyfrag/
-.. _Gaussian:   http://gaussian.com
-.. _ADF:       https://www.scm.com
-.. _Orca:      http://www.orcahome.de/orcanews.htm
-.. _Turbomole: http://www.turbomole.com
+
+
+Install MOMAP for macOS
+-----------------------
+For the macOS case, the installation process is similar to that in the Linux case, however, we need to install the necessary libraries used in the MOMAP package, and here the Homebrew package manager for macOS is used. The installation procedure is as follows:
+
+1. Install Homebrew if not installed already
+
+``/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"``
+
+2. Install GCC, Open-mpi, FFTW3 and Lapack
+
+``brew install gcc@12``
+``brew install open-mpi``
+``brew install fftw``
+``brew install lapack``
+
+Other settings are similar to those in the Linux situation. Once the above installations are finished, we can use the MOMAP for macOS as in the Linux’s case.
+
+
+
+
+Install MOMAP for Windows
+-------------------------
+For the Windows case, MSYS2 can be used as a terminal to install MOMAP. The installation procedure is as follows:
+
+1. To install MOMAP for Windows, we need first to install MSYS2. Download MSYS2 at the link: https://www.msys2.org, and install MSYS2 to location for example C:\msys64. Once the installation finishes, launch MSYS2.
+
+2. First, update the package database and core system package.
+
+``pacman -Syu``
+
+use pacman to install Python and vim etc.:
+
+``pacman -S python``
+``pacman -S vim``
+``pacman -S openssh``
+
+3. Download Windows version of MPI program MSMPI at the link: https://docs.microsoft.com/en-us/message-passing-interface/microsoft-mpi, and install to for instance C:\msys64\msmpi.
+
+4. Once the above MOMAP running environment settings are done, we can install the MOMAP for Windows.
+For example, put the downloaded file to D:\, and extract the archived files to the directory D:\MOMAP-2022B. Check the file env- mingw.sh to see if the environment variable MOMAP_ROOT points to the installed directory.
+
+Edit ~/.bashrc and add the following line:
+
+``. /d/MOMAP-2022B/env-mingw.sh``
+
+
+
+Install MOMAP using Environment Modules
+---------------------------------------
+
+
+If the Environment Modules is installed, one can use the command module to manage the MOMAP running environment. 
+
+1. Suppose the Environment Modules is installed to /opt/Modules, and the module files are put under /opt/Modules/modulefiles, one can create a directory and copy MOMAP to that newly created directory:
+
+``mkdir -p /opt/Modules/modulefiles/momap``
+
+2. Make it available to Environment Modules by using the following command:
+
+``module use ~/.modulefiles``
+
+3. Now one can use the module files as usual. For example, we can load the MOMAP environment by simply running the command:
+
+``module load momap/2022B-openmpi``
+
+
+Licensing
+---------
+
+Before we can use MOMAP package, we need a license. There exist four license options, that is, Trial PC version, All-in-one PC version, Intranet cluster version and Super HPC cluster version.
+⚫ Trial PC version: Choose this option if you’d like to try the software with a desktop/laptop PC.
+⚫ All-in-one PC version: Choose this option if you plan to use the software in a workstation.
+⚫ Intranet cluster version: Choose this option if you plan to use the software in a small group-wise intranet computing cluster.
+⚫ Super HPC cluster version: Choose this option if you plan to use the software in the public domain super HPC cluster.
+
+The program to collect the license data is get_LicenseNumber.exe, the program is called automatically at the end of MOMAP installation.
+For the MOMAP for Windows case, we need to run get_LicenseNumber.exe, that is,
+
+``$MOMAP_ROOT/bin/get_LicenseNumber.exe``
+
+The generated license data file is located at directory $MOMAP_ROOT/license/, named as LicenseNumber.txt. 
+One should send this file to HZW Co. Ltd.
+Later on, a MOMAP license file, hzwtech.lic, will be sent to you by a sales representative from HZW Co. Ltd., you can simply copy the license file to $MOMAP_ROOT/license directory.
+
+
+Test
+----
+
+To verify that the MOMAP package has been properly installed, and the license is correctly configured and installed, users can run a short test to verify the installation.
+
+
+
+Troubleshooting
+---------------
+
+1. In some supercomputing centers, the SSH port may not be the default 22, in that case, we need to setup the SSH environment variable, for example:
+``export MOMAP_SSH_PORT=5577``
+
+2. If MOMAP is to be run under the Ubuntu Linux system, before we start to install MOMAP, we need first to promote the user rights and make the user to be an administrator.
+
+
+
+.. _website: http://www.momap.net.cn/index.php/download
