@@ -12,7 +12,8 @@ Welcome to MOMAP's documentation!
 
   introduction
   install
-  examples
+  spec
+  transport
   theory
 
 
