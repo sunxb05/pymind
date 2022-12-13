@@ -1,8 +1,8 @@
 软件概括
 =======
 
-MOMAP(MOlecular MAterials Property Prediction Package)
--------
+MOMAP简介
+--------
 MOMAP(MOlecular MAterials Property Prediction Package)是一套从理论 上分析、预测有机分子材料光电性能的软件，由清华大学帅志刚教授课题组_、中国科学院化学研究所有机固体实验室理论组和鸿之微科技(上海)股份有限公司_ 联合开发完成。MOMAP 涵盖了从分子激发态的 结构到速率过程、多类材料的电荷迁移率和热电优质、光伏材料的光电流-电压 与功率转换效率等性能的计算预测。目前 MOMAP 的主要功能包括分子发光性能以及电荷输运性能的理论计算。
 
 发光性能
