@@ -10,9 +10,10 @@ Welcome to MOMAP's documentation!
   :maxdepth: 2
   :caption: Contents:
 
-
+  introduction
   install
-
+  examples
+  theory
 
 
 
