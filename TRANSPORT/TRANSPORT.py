@@ -172,7 +172,7 @@ def crystal(str):
     """
 
 def lat_cutoff(float):
-    """定义晶胞截断距离
+    """计算相邻转移积分的截断半径(单位:Å)，这意味着如果两个分子的最近原子距离小于 lat_cutoff，则考虑计算它们之间的转移积分。
 
     Args:
         4 (Default)
@@ -206,7 +206,7 @@ def temp(float):
 
 
 def start_temp(float):
-    """定义模拟初始温度
+    """计算不同温度下的电荷迁移率时，定义模拟初始温度
 
     Args:
         200 (Default)
@@ -217,7 +217,7 @@ def start_temp(float):
     """
 
 def end_temp(float):
-    """定义模拟最终温度
+    """计算不同温度下的电荷迁移率时，定义模拟最终温度
 
     Args:
         300 (Default)
@@ -228,7 +228,7 @@ def end_temp(float):
     """
 
 def delta_temp(float):
-    """定义模拟温度间隔
+    """定义模拟温度间隔，例如，若 Start_Temp，End_Temp 和 delta_Temp 分别为 200，300，50，那么将进行 200K，250K，300 K 下的蒙特卡罗模拟
 
     Args:
         50 (Default)
@@ -250,7 +250,7 @@ def nsimu(int):
     """
 
 def tsimu(int):
-    """定义模拟时间（in ns）
+    """定义总模拟时间（in ns）
 
     Args:
         1000 (Default)
@@ -261,7 +261,7 @@ def tsimu(int):
     """
 
 def tsnap(int):
-    """定义模拟取样间隔
+    """定义记录输出文件中的载流子位置的时间间隔
 
     Args:
         5 (Default)
