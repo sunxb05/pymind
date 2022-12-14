@@ -8,7 +8,7 @@ Welcome to MOMAP's documentation!
 
 .. toctree::
   :maxdepth: 2
-  :caption: Contents:
+  :caption: 内容:
 
   introduction
   install
