@@ -17,9 +17,9 @@ The MOMAP package for Linux is downloaded as a single zipped installable run fil
 
 Unzip the file and add executable attribute to the file, and install MOMAP by running:
 
-``gunzip momap-2022B-linux-el7-openmpi.run.gz``
-``chmod a+x momap-2022B-linux-el-openmpi.run``
-``./momap-2022B-linux-el7-openmpi.run``
+``gunzip momap-2022B-linux-el7-openmpi.run.gz
+  chmod a+x momap-2022B-linux-el-openmpi.run
+  ./momap-2022B-linux-el7-openmpi.run``
 
 The default installation folder is ``$HOME/MOMAP-2022B``, however, one can change the target installation folder in the installation process.
 
