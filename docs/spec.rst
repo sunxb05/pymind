@@ -208,13 +208,12 @@ b. 计算结果解读:
 运行结束后会得到结果文件：
 
 .. csv-table::
-   :header: "输出文件名", "输出文件内容"
+    :header: "输出文件名", "输出文件内容"
 
-
-      spec.tvcf.fo.dat     ，             谱函数输出文件
-      spec.tvcf.ft.dat     ，             关联函数输出文件
-      spec.tvcf.log        ，             log 文件
-      spec.tvcf.spec.dat   ，             光谱文件
+      spec.tvcf.fo.dat    ,             谱函数输出文件
+      spec.tvcf.ft.dat    ,             关联函数输出文件
+      spec.tvcf.log       ,             log 文件
+      spec.tvcf.spec.dat  ,             光谱文件
 
 
 1) 计算完成后先确认关联函数是否收敛，将 spec.tvcf.ft.dat 的前两列画图，若随着积分时间的增加，纵坐标的值基本为 0 且呈直线，则表示关联函数已经收敛。
