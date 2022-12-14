@@ -61,7 +61,7 @@ Install MOMAP for Windows
 -------------------------
 For the Windows case, MSYS2 can be used as a terminal to install MOMAP. The installation procedure is as follows:
 
-1. To install MOMAP for Windows, we need first to install MSYS2. Download MSYS2 at the link: ``https://www.msys2.org``, and install MSYS2 to location for example C:\msys64. Once the installation finishes, launch MSYS2.
+1. To install MOMAP for Windows, we need first to install MSYS2. Download MSYS2 at the link: ``https://www.msys2.org``, and install MSYS2 to location for example C:\\msys64. Once the installation finishes, launch MSYS2.
 
 2. First, update the package database and core system package. Then use pacman to install Python and vim etc.:
 
