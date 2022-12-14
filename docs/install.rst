@@ -27,7 +27,7 @@ The default installation folder is ``$HOME/MOMAP-2022B``, however, one can chang
 
 Before using MOMAP, one should first set up the running environment by adding the following line to ``~/.bashrc`` if Bash is used
 
-``. <installed_momap_folder>/env.sh``
+	``. <installed_momap_folder>/env.sh``
 
 Log out and log back in again for it to take effect, then we can proceed to run MOMAP.
 
@@ -75,12 +75,12 @@ use pacman to install Python and vim etc.:
 
 	``pacman -S openssh``
 
-3. Download Windows version of MPI program MSMPI at the link: ``https://docs.microsoft.com/en-us/message-passing-interface/microsoft-mpi``, and install to for instance C:\msys64\msmpi.
+3. Download Windows version of MPI program MSMPI at the link: ``https://docs.microsoft.com/en-us/message-passing-interface/microsoft-mpi``, and install to for instance ``C:\\msys64\\msmpi``.
 
 4. Once the above MOMAP running environment settings are done, we can install the MOMAP for Windows.
-For example, put the downloaded file to D:\, and extract the archived files to the directory D:\MOMAP-2022B. Check the file env- mingw.sh to see if the environment variable MOMAP_ROOT points to the installed directory.
+For example, put the downloaded file to ``D:\\``, and extract the archived files to the directory ``D:\\MOMAP-2022B``. Check the file env-mingw.sh to see if the environment variable MOMAP_ROOT points to the installed directory.
 
-Edit ~/.bashrc and add the following line:
+Edit ``~/.bashrc`` and add the following line:
 
 	``. /d/MOMAP-2022B/env-mingw.sh``
 
@@ -92,7 +92,7 @@ Install MOMAP using Environment Modules
 
 If the Environment Modules is installed, one can use the command module to manage the MOMAP running environment. 
 
-1. Suppose the Environment Modules is installed to /opt/Modules, and the module files are put under /opt/Modules/modulefiles, one can create a directory and copy MOMAP to that newly created directory:
+1. Suppose the Environment Modules is installed to ``/opt/Modules``, and the module files are put under ``/opt/Modules/modulefiles``, one can create a directory and copy MOMAP to that newly created directory:
 
 	``mkdir -p /opt/Modules/modulefiles/momap``
 
@@ -120,7 +120,7 @@ Before we can use MOMAP package, we need a license. There exist four license opt
 
 
 	+ Super HPC cluster version: Choose this option if you plan to use the software in the public domain super HPC cluster.
-	
+
 
 The program to collect the license data is get_LicenseNumber.exe, the program is called automatically at the end of MOMAP installation.
 For the MOMAP for Windows case, we need to run get_LicenseNumber.exe, that is,
