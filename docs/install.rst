@@ -1,8 +1,8 @@
 软件安装
-=======
+*******
 
-Download MOMAP 
---------------
+Download and Installation 
+=========================
 
 
 First download the MOMAP package from MOMAP website_, by simply clicking the related link or DOWNLOAD button to download the file.
@@ -98,14 +98,14 @@ If the Environment Modules is installed, one can use the command module to manag
 ``module load momap/2022B-openmpi``
 
 
-Licensing
----------
+Licensing and Test
+==================
 
 Before we can use MOMAP package, we need a license. There exist four license options, that is, Trial PC version, All-in-one PC version, Intranet cluster version and Super HPC cluster version.
-⚫ Trial PC version: Choose this option if you’d like to try the software with a desktop/laptop PC.
-⚫ All-in-one PC version: Choose this option if you plan to use the software in a workstation.
-⚫ Intranet cluster version: Choose this option if you plan to use the software in a small group-wise intranet computing cluster.
-⚫ Super HPC cluster version: Choose this option if you plan to use the software in the public domain super HPC cluster.
++ Trial PC version: Choose this option if you’d like to try the software with a desktop/laptop PC.
++ All-in-one PC version: Choose this option if you plan to use the software in a workstation.
++ Intranet cluster version: Choose this option if you plan to use the software in a small group-wise intranet computing cluster.
++ Super HPC cluster version: Choose this option if you plan to use the software in the public domain super HPC cluster.
 
 The program to collect the license data is get_LicenseNumber.exe, the program is called automatically at the end of MOMAP installation.
 For the MOMAP for Windows case, we need to run get_LicenseNumber.exe, that is,
@@ -117,15 +117,12 @@ One should send this file to HZW Co. Ltd.
 Later on, a MOMAP license file, hzwtech.lic, will be sent to you by a sales representative from HZW Co. Ltd., you can simply copy the license file to $MOMAP_ROOT/license directory.
 
 
-Test
-----
-
 To verify that the MOMAP package has been properly installed, and the license is correctly configured and installed, users can run a short test to verify the installation.
 
 
 
 Troubleshooting
----------------
+===============
 
 1. In some supercomputing centers, the SSH port may not be the default 22, in that case, we need to setup the SSH environment variable, for example:
 ``export MOMAP_SSH_PORT=5577``
