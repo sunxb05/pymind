@@ -123,7 +123,7 @@ b. 激发态构型优化与频率计算
 
 .. code-block:: bash
 
-	do_evc          = 1	                     # 1 表示开启dushin计算，0 表示关闭
+	do_evc          = 1                    # 1 表示开启dushin计算，0 表示关闭
 
 	&evc
 	  ffreq(1)      = "azulene-s0.log"       #基态结果的日志文件
@@ -141,7 +141,7 @@ b. 激发态构型优化与频率计算
 
 .. seealso ::
 
-	对以上MOMAP输入变量的解释，请参考API Reference部分.
+	 对以上MOMAP输入变量的解释，请参考API Reference部分.
 
 
 
@@ -149,13 +149,8 @@ b. 激发态构型优化与频率计算
 
    	MOMAP支持并行运算，如果使用队列脚本(如 PBS 脚本)提交任务，则只需在 PBS 脚本中修改提交队列名称、使用节点数量和核数量。
 
-    如果在当前节点使用 2 个核进行计算，需写入如下 nodefile 文件 ::
+   	如果不使用队列脚本，可以在 nodefile 里 指定节点名称和核数。例如:需要使用节点名称为 node1 和 node2 的两个节点，
 
-	    localhost
-	    localhost
-
-
-   	如果不使用队列脚本，可以在 nodefile 里 指定节点名称和核数。例如:需要使用节点名称为 node1 和 node2 的两个节点， 
    	每个节点上使用 2 个核。则 nodefile 写为 ::
 
 	    node1 	
