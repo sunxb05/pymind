@@ -27,7 +27,7 @@ a. 基态构型优化与频率计算
 	%mem=4GB                    #内存大小
 	%nprocl=1                   #使用节点数
 	%nprocs=16                  #每个节点上的并行的核数
-	#p opt freq B3LYP/6-31G*	#基于DFT方法/B3LYP 泛函/6-31G(d)基组对分子基态构型进行优化，然后计算优化后分子构型的频率
+	#p opt freq B3LYP/6-31G     #基于DFT方法/B3LYP 泛函/6-31G(d)基组对分子基态构型进行优化，然后计算优化后分子构型的频率
 
 	azulene-s0 optimization	    #标题行
 
@@ -131,7 +131,7 @@ b. 激发态构型优化与频率计算
 	/
 
 
-执行以下命令运行 EVC 振动分析程序:: 
+执行以下命令运行 EVC 振动分析程序:
 
 	``momap –input momap.inp –nodefile nodefile``
 
@@ -145,29 +145,23 @@ b. 激发态构型优化与频率计算
 
 
 
-
 .. important ::
 
-   	MOMAP支持并行运算，如果使用队列脚本(如 PBS 脚本)提交任务，则只需在 PBS 脚本中修改提
-    交队列名称、使用节点数量和核数量。
+   	MOMAP支持并行运算，如果使用队列脚本(如 PBS 脚本)提交任务，则只需在 PBS 脚本中修改提交队列名称、使用节点数量和核数量。
 
-    如果在当前节点使用 2 个核进行计算，需写入如下 nodefile 文件: ::
+    如果在当前节点使用 2 个核进行计算，需写入如下 nodefile 文件 ::
 
-    localhost
-
-    localhost
+	    localhost
+	    localhost
 
 
    	如果不使用队列脚本，可以在 nodefile 里 指定节点名称和核数。例如:需要使用节点名称为 node1 和 node2 的两个节点， 
-   	每个节点上使用 2 个核。则 nodefile 写为: ::
+   	每个节点上使用 2 个核。则 nodefile 写为 ::
 
-    node1 
-
-    node1 
-
-    node2 
-
-    node2
+	    node1 	
+	    node1 	
+	    node2 	
+	    node2
 
 
 
