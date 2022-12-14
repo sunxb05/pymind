@@ -15,7 +15,7 @@ Welcome to MOMAP's documentation!
   spec
   transport
   theory
-
+  appendix
 
 
 Indices and tables

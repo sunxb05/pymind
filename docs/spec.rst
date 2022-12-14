@@ -113,8 +113,8 @@ b. 激发态构型优化与频率计算
 
 
 
-2. 振动分析 
-----------
+2. 振动分析(EVC) 
+---------------
 
 本部分计算文件在 azulene/evc/目录下。
 
@@ -123,7 +123,7 @@ b. 激发态构型优化与频率计算
 
 .. code-block:: bash
 
-	do_evc          = 1                    # 1 表示开启dushin计算，0 表示关闭
+	do_evc          = 1                      # 1 表示开启dushin计算，0 表示关闭
 
 	&evc
 	  ffreq(1)      = "azulene-s0.log"       #基态结果的日志文件
@@ -149,9 +149,7 @@ b. 激发态构型优化与频率计算
 
    	MOMAP支持并行运算，如果使用队列脚本(如 PBS 脚本)提交任务，则只需在 PBS 脚本中修改提交队列名称、使用节点数量和核数量。
 
-   	如果不使用队列脚本，可以在 nodefile 里 指定节点名称和核数。例如:需要使用节点名称为 node1 和 node2 的两个节点，
-
-   	每个节点上使用 2 个核。则 nodefile 写为 ::
+   	如果不使用队列脚本，可以在 nodefile 里 指定节点名称和核数。例如:需要使用节点名称为 node1 和 node2 的两个节点，每个节点上使用 2 个核。则 nodefile 写为 ::
 
 	    node1 	
 	    node1 	
@@ -166,70 +164,144 @@ b. 激发态构型优化与频率计算
 ----------
 
 
-
-
-
-
-
-
-
-
-.. important::
-
-   Most options described in this manual should be specified in the Engine block::
-
-    # All keywords should be specified inside the 'Engine' block
-      Engine
-         Basis
-            Type DZP
-         End
-
-         XC
-            GGA PBE
-         End
-      EndEngine
-
-
-You can put more remarks in the input file to be echoed in the standard output file; these will not become part of the job identification:
-
-::
-
-   COMMENT
-      text
-      ...
-   end
-
-
-
-New syntax for a few keywords
-+++++++++++++++++++++++++++++
-
-In order to adapt to the new (more strict) input format, the syntax of a few keywords had to be changed.
-
-
-.. csv-table::
-   :header: "key in 2017 and before", "key in 2018 and later / comments"
-
-
-      EField                      , 2020: key 'System%ElectroStaticEmbedding' in
-      Geometry                    , 2020: key 'Task' and key 'Properties' in
-      Thermo                      , 2020: key 'Thermo' in
-
-Strict parsing of input file
+a. 辐射速率输入文件 momap.inp:
 ++++++++++++++++++++++++++++
 
-In2018 and later **exact keyword matching** is used, meaning that **keywords abbreviations (or extensions) are not allowed**.
-In2017 (and previous versions) the parsing of the input file was *tolerant* and it would allow for abbreviations and extension of keywords.
+.. code-block:: bash
 
-In the example below, only the first version is allowed in2018 and later, while the second and third version will trigger an input syntax error::
+	do_spec_tvcf_ft   = 1                   #1 表示开启计算荧光关联函数
+	do_spec_tvcf_spec = 1	                #1 表示开启计算荧光光谱
 
-   # This is the proper input syntax:
-   SCF
-      Converge 1.0E-7
-   End
+	&spec_tvcf                              #描述计算内容
+	  DUSHIN        True                    #是否考虑 Duschinsky 转动(t 开启，f 关闭)
+	  Temp          300                     #温度
+	  tmax          1000                    #积分时间
+	  dt            1                       #积分步长
+	  Ead           0.07509                 #绝热激发能
+	  EDMA          0.92694                 #吸收跃迁偶极矩
+	  EDME          0.64751                 #发射跃迁偶极矩
+	  FreqScale     1.0                     #频率缩放因子
+	  DSFile        "evc.cart.dat"          #定义读取的 evc 文件名
+	  Emax          0.3 au                  #定义光谱频率范围上限
+	  dE            0.00001                 #定义输出能量间隔
+	  logFile       "spec.tvcf.log"         #定义输出 log 文件名
+	  FtFile        "spec.tvcf.ft.dat"      #定义输出的关联函数文件名
+	  FoFile        "spec.tvcf.fo.dat"      #谱函数输出文件
+	  FoSFile       "spec.tvcf.spec.dat"    #归一化的光谱输出文件
+	/
+
+
+.. seealso ::
+
+	 对以上MOMAP输入变量的解释，请参考API Reference部分.
+
+
+把 momap.inp 文件、nodefile 文件和 4.1.2 部分计算得到的 evc.cart.dat 文件 放置于同一目录，运行以下命令进行计算:
+
+	``momap –input momap.inp –nodefile nodefile``
+
+
+
+b. 计算结果解读:
++++++++++++++++++++
+
+运行结束后会得到结果文件：
+
+.. csv-table::
+   :header: "输出文件名", "输出文件内容"
+
+
+      spec.tvcf.fo.dat                  谱函数输出文件
+      spec.tvcf.ft.dat                  关联函数输出文件
+      spec.tvcf.log                     log 文件
+      spec.tvcf.spec.dat                光谱文件
+
+
+1) 计算完成后先确认关联函数是否收敛，将 spec.tvcf.ft.dat 的前两列画图，若随着积分时间的增加，纵坐标的值基本为 0 且呈直线，则表示关联函数已经收敛。
+
+
+
+2) 确认关联函数收敛后，根据光谱文件 spec.tvcf.spec.dat，选取所需数据画出 相关的吸收光谱和发射光谱:
+
+
+3) 辐射速率 kr 可在 spec.tvcf.log 文件末端读取。如下图所示，第一个数值和第 二个数值都表示辐射速率，单位分别是 au 和 s-1，第三个数值表示寿命。计算得 到 azulene 分子的辐射速率 kr 为 2.72281554×105s-1。
 
 
 
 
+
+4. 非辐射速率
+------------
+
+本部分计算文件在 azulene/kic/目录下。
+
+计算内转换过程不仅需要分子基态 S0 与激发态 S1 的构型优化结果、频率计算结果，还需要包含与**非绝热耦合矩阵元相关的 azulene-nacme.log 文件**。非绝热 耦合计算时使用的计算方法、泛函等尽量与构型优化时保持一致。
+
+a. 非绝热耦合矩阵元:
+++++++++++++++++++
+
+本部分计算文件在 azulene/kic/nacme/目录下。
+
+在 S0 最稳定构型下设置关键词为:
+
+.. code-block:: bash
+
+	#p td B3lyp/6-31G(d) prop=(fitcharge,field) iop(6/22=-4, 6/29=1, 6/30=0, 6/17=2) nosymm
+
+
+b. 振动分析(EVC):
+++++++++++++++++++
+
+本部分计算文件在相关算例 azulene/kic/evc/目录下。
+
+收集基态、激发态计算结果文件，包括日志文件 (azulene-s0.log 和 azulene-s1.log)和格式化的 Checkpoint 文件(azulene-s0.fchk 和 azulene-s1.fchk)，注意需保证振动结果无虚频。此外，还有 非绝热耦合矩阵元相关的 azulene-nacme.log 文件。将这些文件都放在同一个目录中，编写 EVC 振动分析的输入文件 momap.inp
+
+.. code-block:: bash
+
+	do_evc          = 1                      # 1 表示开启dushin计算，0 表示关闭
+
+	&evc
+	  ffreq(1)      = "azulene-s0.log"       #基态结果的日志文件
+	  ffreq(2)      = "azulene-s1.log"       #激发态结果的日志文件
+	  fnacme        = "azulene-nacme.log"    #非绝热耦合文件
+
+	/
+
+
+执行以下命令运行 EVC 振动分析程序:
+
+	``momap –input momap.inp –nodefile nodefile``
+
+程序正常结束后，得到下一步计算的输入文件 evc.cart.dat 和 evc.cart.nac。
+
+
+c. 非辐射速率输入文件 momap.inp:
++++++++++++++++++++++++++++++
+
+
+.. code-block:: bash
+
+	do_ic_tvcf_ft   = 1                   #1 表示开启计算内转换关联函数
+	do_ic_tvcf_spec = 1	                #1 表示开启计算内转换光谱
+
+	&spec_tvcf                              #描述计算内容
+	  DUSHIN        True                    #是否考虑 Duschinsky 转动(t 开启，f 关闭)
+	  Temp          300                     #温度
+	  tmax          1000                    #积分时间
+	  dt            1                       #积分步长
+	  Ead           0.07509                 #绝热激发能
+	  DSFile        "evc.cart.dat"          #定义读取的 evc 文件名
+	  CoulFile      "evc.cart.nac"          #定义读取的 nacme 文件名
+	  Emax          0.3 au                  #定义光谱频率范围上限
+	  dE            0.00001                 #定义输出能量间隔
+	  logFile       "spec.tvcf.log"         #定义输出 log 文件名
+	  FtFile        "spec.tvcf.ft.dat"      #定义输出的关联函数文件名
+	  FoFile        "spec.tvcf.fo.dat"      #谱函数输出文件
+	/
+
+d. 计算结果解读:
++++++++++++++++++++
+
+运行结束后会得到结果文件与相应解读与辐射速率结果类似。
 
 
