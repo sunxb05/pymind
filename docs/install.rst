@@ -17,9 +17,11 @@ The MOMAP package for Linux is downloaded as a single zipped installable run fil
 
 Unzip the file and add executable attribute to the file, and install MOMAP by running:
 
-``gunzip momap-2022B-linux-el7-openmpi.run.gz
-  chmod a+x momap-2022B-linux-el-openmpi.run
-  ./momap-2022B-linux-el7-openmpi.run``
+``gunzip momap-2022B-linux-el7-openmpi.run.gz``
+
+``chmod a+x momap-2022B-linux-el-openmpi.run``
+
+``./momap-2022B-linux-el7-openmpi.run``
 
 The default installation folder is ``$HOME/MOMAP-2022B``, however, one can change the target installation folder in the installation process.
 
@@ -43,8 +45,11 @@ For the macOS case, the installation process is similar to that in the Linux cas
 2. Install GCC, Open-mpi, FFTW3 and Lapack
 
 ``brew install gcc@12``
+
 ``brew install open-mpi``
+
 ``brew install fftw``
+
 ``brew install lapack``
 
 Other settings are similar to those in the Linux situation. Once the above installations are finished, we can use the MOMAP for macOS as in the Linux’s case.
@@ -65,7 +70,9 @@ For the Windows case, MSYS2 can be used as a terminal to install MOMAP. The inst
 use pacman to install Python and vim etc.:
 
 ``pacman -S python``
+
 ``pacman -S vim``
+
 ``pacman -S openssh``
 
 3. Download Windows version of MPI program MSMPI at the link: https://docs.microsoft.com/en-us/message-passing-interface/microsoft-mpi, and install to for instance C:\msys64\msmpi.
@@ -102,9 +109,13 @@ Licensing and Test
 ==================
 
 Before we can use MOMAP package, we need a license. There exist four license options, that is, Trial PC version, All-in-one PC version, Intranet cluster version and Super HPC cluster version.
+
 + Trial PC version: Choose this option if you’d like to try the software with a desktop/laptop PC.
+
 + All-in-one PC version: Choose this option if you plan to use the software in a workstation.
+
 + Intranet cluster version: Choose this option if you plan to use the software in a small group-wise intranet computing cluster.
+
 + Super HPC cluster version: Choose this option if you plan to use the software in the public domain super HPC cluster.
 
 The program to collect the license data is get_LicenseNumber.exe, the program is called automatically at the end of MOMAP installation.
