@@ -63,11 +63,9 @@ For the Windows case, MSYS2 can be used as a terminal to install MOMAP. The inst
 
 1. To install MOMAP for Windows, we need first to install MSYS2. Download MSYS2 at the link: ``https://www.msys2.org``, and install MSYS2 to location for example C:\msys64. Once the installation finishes, launch MSYS2.
 
-2. First, update the package database and core system package.
+2. First, update the package database and core system package. Then use pacman to install Python and vim etc.:
 
-``pacman -Syu``
-
-use pacman to install Python and vim etc.:
+	``pacman -Syu``
 
 	``pacman -S python``
 
@@ -75,10 +73,10 @@ use pacman to install Python and vim etc.:
 
 	``pacman -S openssh``
 
-3. Download Windows version of MPI program MSMPI at the link: ``https://docs.microsoft.com/en-us/message-passing-interface/microsoft-mpi``, and install to for instance ``C:\msys64\msmpi``.
+3. Download Windows version of MPI program MSMPI at the link: ``https://docs.microsoft.com/en-us/message-passing-interface/microsoft-mpi``, and install to for instance C:\\msys64\\msmpi.
 
 4. Once the above MOMAP running environment settings are done, we can install the MOMAP for Windows.
-For example, put the downloaded file to ``D:\``, and extract the archived files to the directory ``D:\MOMAP-2022B``. Check the file env-mingw.sh to see if the environment variable MOMAP_ROOT points to the installed directory.
+For example, put the downloaded file to D:\\, and extract the archived files to the directory D:\\MOMAP-2022B. Check the file env-mingw.sh to see if the environment variable MOMAP_ROOT points to the installed directory.
 
 Edit ``~/.bashrc`` and add the following line:
 
