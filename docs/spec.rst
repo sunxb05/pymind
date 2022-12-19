@@ -793,31 +793,109 @@ b. 激发态构型优化与频率计算
 计算后得到基态 S0 和激发态 S1 计算的日志文件 porphine-s0.log、 porphine-s1.log、porphine-s0.chk 和 porphine-s1.chk。使用 formchk 命令将 porphine-s0.chk 和 porphine-s1.chk 转换为 Checkpoint 文件 porphine-s0.fchk 和 porphine-s1.fchk。这些文件将用于后续的振动分析计算。
 
 
-
-2. 振动分析(EVC) 
+2. 计算 numfreq 
 ---------------
 
-本部分计算文件在 Irppy3/evc/目录下。
+考虑 Herzberg-Teller 效应需要进行 numfreq 计算，本部分计算在 porphine/numfreq/目录下。
+
+输入文件包含:porphine-s1.com、input、nodefile。 构建 porphine-s1.com 文件，包含 s1 态优化后的平衡构型:
+
+.. code-block:: bash
+
+	%chk=porphine-s1.chk
+	%mem=32GB
+	%nprocl=1
+	%nprocs=16
+	#p td(root=1) b3lyp/6-31g(d)	
+
+	numfreq-porphine-s1	
+
+	0 1
+	 N                 -2.11384400   -0.00001800    0.00000000
+	 N                 -0.00006900   -2.05188400    0.00000000
+	 N                  0.00006800    2.05188500    0.00000000
+	 N                  2.11384300    0.00001700    0.00000000
+	 C                 -2.89604400   -1.13283300    0.00000000
+	 C                 -2.89618900    1.13269100    0.00000000
+	 C                 -1.08901100   -2.88277400    0.00000000
+	 C                 -1.08901100    2.88263300    0.00000000
+	 C                  1.08901100   -2.88262900    0.00000000
+	 C                  1.08901100    2.88277000    0.00000000
+	 C                  2.89619400   -1.13268800    0.00000000
+	 C                  2.89604800    1.13283000    0.00000000
+	 C                 -2.42772400   -2.44844700    0.00000000
+	 C                 -2.42776700    2.44830900    0.00000000
+	 C                  2.42776600   -2.44831100    0.00000000
+	 C                  2.42772200    2.44844800    0.00000000
+	 C                 -4.26026800   -0.68753300    0.00000000
+	 C                 -4.26036800    0.68731000    0.00000000
+	 C                 -0.68129900   -4.27776900    0.00000000
+	 C                 -0.68142300    4.27767200    0.00000000
+	 C                  0.68142500   -4.27767100    0.00000000
+	 C                  0.68130100    4.27776900    0.00000000
+	 C                  4.26036500   -0.68731500    0.00000000
+	 C                  4.26026400    0.68753800    0.00000000
+	 H                 -1.09988600    0.00015100    0.00000000
+	 H                  1.09988500   -0.00015800    0.00000000
+	 H                 -3.19164600   -3.22081100    0.00000000
+	 H                 -3.19172100    3.22066300    0.00000000
+	 H                  3.19172100   -3.22066400    0.00000000
+	 H                  3.19164600    3.22081000    0.00000000
+	 H                 -5.11723000   -1.34805000    0.00000000
+	 H                 -5.11733600    1.34780700    0.00000000
+	 H                 -1.35301100   -5.12739200    0.00000000
+	 H                 -1.35313400    5.12728400    0.00000000
+	 H                  1.35313600   -5.12728300    0.00000000
+	 H                  1.35301400    5.12739100    0.00000000
+	 H                  5.11733400   -1.34781000    0.00000000
+	 H                  5.11722500    1.34805600    0.00000000
+
+构建 input 文件:
+
+.. code-block:: bash
+
+	&control
+	qctype = "gaussian"
+	task = "numfreq"
+	fxyz = "porphine-s1.com" symm = .false.
+	dx = 0.01
+	/
 
 
-收集计算得到的基态 S0、三重激发态 T1 的计算结果文件，包括日志文件 (Irppy3-s0-freq.log 和 Irppy3-t1-freq.log)和格式化的 Checkpoint 文件 (Irppy3-s0-freq.fchk 和 Irppy3-t1-freq.fchk)，注意需保证振动结果无虚频。将这些文件都放在一个文件夹 (evc)中，编写 EVC 振动分析的输入文件 momap.inp:
+
+任务计算完成后会生成 PES-0 文件夹，文件夹内有 numfreq-es.out 文件
+
+
+
+
+3. 振动分析(EVC) 
+---------------
+
+将 4.4.1 和 4.4.2 部分计算得到的 porphine-s0.log、porphine-s1.log、porphine-s0.fchk、porphine-s1.fchk 和 numfreq-es.out 文件放入 porphine/evc/目录下。构建 momap.inp 文件，evc 部分添加关键词:ftdipd = "numfreq-es.out"。如下 图所示:
 
 .. code-block:: bash
 
 	do_evc          = 1                      # 1 表示开启dushin计算，0 表示关闭
 
 	&evc
-	  ffreq(1)      = "azulene-s0.log"       #基态结果的日志文件
-	  ffreq(2)      = "azulene-s1.log"       #激发态结果的日志文件
+	  ffreq(1)      = "porphine-s0.log"       #基态结果的日志文件
+	  ffreq(2)      = "porphine-s1.log"       #激发态结果的日志文件
+	  ftdipd        = "numfreq-es.out"        #输出文件
+	  sort_mode     = 1                       #模式
 	/
 
 
 
-3. 辐射速率
+计算完成后得到 evc.cart.dat 和 evc.cart.dip，这两个文件将于用后续计算。
+
+
+
+4. 辐射速率
 ----------
 
+本部分计算在 porphine/kr/目录下
 
-a. 辐射速率输入文件 momap.inp:
+辐射速率输入文件 momap.inp:
 ++++++++++++++++++++++++++++
 
 .. code-block:: bash
@@ -828,13 +906,13 @@ a. 辐射速率输入文件 momap.inp:
 	&spec_tvcf                              #描述计算内容
 	  DUSHIN        .t.                     #是否考虑 Duschinsky 转动(t 开启，f 关闭)
 	  Temp          300                     #温度
-	  tmax          1500 fs                 #积分时间
+	  tmax          3000 fs                 #积分时间
 	  dt            0.01 fs                 #积分步长
-	  Ead           0.09418289 au           #绝热激发能
-	  EDMA          1 debye                 #吸收跃迁偶极矩
-	  EDME          0.306909 debye          #发射跃迁偶极矩
-	  FreqScale     1.0                     #频率缩放因子
+	  Ead           0.083121346 au          #绝热激发能
+	  EDMA          0.025417 debye          #吸收跃迁偶极矩
+	  EDME          0.378704 debye          #发射跃迁偶极矩
 	  DSFile        "evc.cart.dat"          #定义读取的 evc 文件名
+	  DDplFile      "evc.cart.dip"          #定义读取的 dip 文件名
 	  Emax          0.3 au                  #定义光谱频率范围上限
 	  dE            0.00001 au              #定义输出能量间隔
 	  logFile       "spec.tvcf.log"         #定义输出 log 文件名
@@ -844,78 +922,11 @@ a. 辐射速率输入文件 momap.inp:
 	/
 
 
-.. seealso ::
 
-	 对以上MOMAP输入变量的解释，请参考API Reference部分.
-
-
-把 momap.inp 文件、nodefile 文件和 EVC 部分计算得到的 evc.cart.dat 文件 放置于同一目录，运行以下命令进行计算:
+把 momap.inp 文件、nodefile 文件和 EVC 部分计算得到的 evc.cart.dat 和 evc.cart.dip 文件 放置于同一目录，运行以下命令进行计算:
 
 	``momap –input momap.inp –nodefile nodefile``
 
-
-
-b. 计算结果解读:
-+++++++++++++++++++
-
-运行结束后会得到结果文件：
-
-.. csv-table::
-    :header: "输出文件名", "输出文件内容"
-
-	    spec.tvcf.fo.dat    ,             谱函数输出文件
-	    spec.tvcf.ft.dat    ,             关联函数输出文件
-	    spec.tvcf.log       ,             log 文件
-	    spec.tvcf.spec.dat  ,             光谱文件
-
-
-1) 计算完成后先确认关联函数是否收敛，将 spec.tvcf.ft.dat 的前两列画图，若随着积分时间的增加，纵坐标的值基本为 0 且呈直线，则表示关联函数已经收敛。
-
-
-
-2) 确认关联函数收敛后，根据光谱文件 spec.tvcf.spec.dat，选取所需数据画出 相关的吸收光谱和发射光谱:
-
-
-3) 辐射速率 kr 可在 spec.tvcf.log 文件末端读取。如下图所示，第一个数值和第 二个数值都表示辐射速率，单位分别是 au 和 s-1，第三个数值表示寿命。计算得 到 azulene 分子的辐射速率 kr 为 2.72281554×105s-1。
-
-
-
-
-
-4. 非辐射速率
-------------
-
-本部分计算文件在 Irppy3/kisc/目录下。
-
-计算系间窜越需要读取分子的自旋轨道耦合常数 Hso。本算例采用 Dalton 软件计算得到自旋轨道耦合常数 Hso 为 116.877376 cm-1。
-
-
-
-
-非辐射速率输入文件 momap.inp:
-+++++++++++++++++++++++++++++
-
-
-.. code-block:: bash
-
-	do_isc_tvcf_ft   = 1                   #1 表示开启计算系间窜越关联函数
-	do_isc_tvcf_spec = 1	                #1 表示开启计算系间窜越光谱
-
-	&isc_tvcf                              #描述计算内容
-	  DUSHIN        .t.                     #是否考虑 Duschinsky 转动(t 开启，f 关闭)
-	  Temp          298 K                   #温度
-	  tmax          1500 fs                 #积分时间
-	  dt            0.01 fs                 #积分步长
-	  Ead           0.09418289 au           #绝热激发能
-	  Hso           116.877376 cm-1         #旋轨耦合常数
-	  DSFile        "evc.cart.dat"          #定义读取的 evc 文件名
-	  CoulFile      "evc.cart.nac"          #定义读取的 nacme 文件名
-	  Emax          0.3 au                  #定义光谱频率范围上限
-	  dE            0.00001                 #定义输出能量间隔
-	  logFile       "isc.tvcf.log"          #定义输出 log 文件名
-	  FtFile        "isc.tvcf.ft.dat"       #定义输出的关联函数文件名
-	  FoFile        "isc.tvcf.fo.dat"       #谱函数输出文件
-	/
 
 
 
