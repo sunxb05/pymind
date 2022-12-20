@@ -88,56 +88,56 @@
 .. code-block:: bash
 
 	&transport
-	  do_transport_prepare              = 1                               # 是否生成预备文件, 1表示开启，0表示关闭
-	  do_transport_submit_HL_job        = 1                               # 是否开启计算转移积分, 1表示开启，0表示关闭
-	  do_transport_get_transferintegral = 1                               # 计算计算转移积分, 1表示开启，0表示关闭
-	  do_transport_submit_RE_job        = 1                               # 计算重整能, 1表示开启，0表示关闭
-	  do_transport_get_re_evc           = 1                               # 使用 evc 程序分析重整能, 1表示开启，0表示关闭
-	  do_transport_run_MC               = 1                               # Monte Carlo 模拟, 1表示开启，0表示关闭
-	  do_transport_get_mob_MC           = 1                               # 计算迁移率, 1表示开启，0表示关闭
-	  do_transport_run_MC_temp          = 0                               # 不同温度下的Monte Carlo 模拟, 1表示开启，0表示关闭
-	  do_transport_get_mob_MC_temp      = 0                               # 计算不同温度下的迁移率, 1表示开启，0表示关闭
-	  do_transport_run_ME               = 0                               # ME 方法模拟, 1表示开启，0表示关闭
-	  do_transport_get_mob_ME           = 0                               # ME 方法计算迁移率, 1表示开启，0表示关闭
-	  do_transport_run_ME_temp          = 0                               # 不同温度下的 ME 模拟, 1表示开启，0表示关闭
-	  do_transport_get_mob_ME_temp      = 0                               # 计算不同温度下的迁移率, 1表示开启，0表示关闭
-	  do_transport_gather_momap_data    = 0	                              # 收集计算的相关数据, 1表示开启，0表示关闭
+	  do_transport_prepare              = 1     # 是否生成预备文件, 1表示开启，0表示关闭
+	  do_transport_submit_HL_job        = 1     # 是否开启计算转移积分, 1表示开启，0表示关闭
+	  do_transport_get_transferintegral = 1     # 计算计算转移积分, 1表示开启，0表示关闭
+	  do_transport_submit_RE_job        = 1     # 计算重整能, 1表示开启，0表示关闭
+	  do_transport_get_re_evc           = 1     # 使用 evc 程序分析重整能, 1表示开启，0表示关闭
+	  do_transport_run_MC               = 1     # Monte Carlo 模拟, 1表示开启，0表示关闭
+	  do_transport_get_mob_MC           = 1     # 计算迁移率, 1表示开启，0表示关闭
+	  do_transport_run_MC_temp          = 0     # 不同温度下的Monte Carlo 模拟, 1表示开启，0表示关闭
+	  do_transport_get_mob_MC_temp      = 0     # 计算不同温度下的迁移率, 1表示开启，0表示关闭
+	  do_transport_run_ME               = 0     # ME 方法模拟, 1表示开启，0表示关闭
+	  do_transport_get_mob_ME           = 0     # ME 方法计算迁移率, 1表示开启，0表示关闭
+	  do_transport_run_ME_temp          = 0     # 不同温度下的 ME 模拟, 1表示开启，0表示关闭
+	  do_transport_get_mob_ME_temp      = 0     # 计算不同温度下的迁移率, 1表示开启，0表示关闭
+	  do_transport_gather_momap_data    = 0	    # 收集计算的相关数据, 1表示开启，0表示关闭
 
 	  # Job Scheduling 
-	  queue_name      = workq                                             # 计算任务提交队列
-	  sched_type      = local                               	          # pbs, slurm, lsf, or local， 作业管理系统
+	  queue_name      = workq                   # 计算任务提交队列
+	  sched_type      = local                   # pbs, slurm, lsf, or local， 作业管理系统
 
-	  compute_engine  = 1                                                 # 1 = Gaussian, 2 = ORCA, 3 = QCHEM， 4 = BDF， 定义使用的计算引擎
-	  qc_exe          = g09                                               # g09/g16 or fullpath/orca or qchem or BDF， 计算引擎可执行程序
+	  compute_engine  = 1                       # 1 = Gaussian, 2 = ORCA, 3 = QCHEM， 4 = BDF， 定义使用的计算引擎
+	  qc_exe          = g09                     # g09/g16 or fullpath/orca or qchem or BDF， 计算引擎可执行程序
 
-	  module_mpich2 = momap/devel                                         # MOMAP路径
-	  module_qc = gaussian/g09.e01	                                      # 计算引擎路径
+	  module_mpich2 = momap/devel               # MOMAP安装路径
+	  module_qc = gaussian/g09.e01	            # 计算引擎路径
 
-	  qc_method       = b3lyp                                             # 计算所用方法
-	  qc_basis        = b3lyp cc-pvdz                                     # 计算所用基组
-	  qc_basis_re     = b3lyp cc-pvdz                                     # 计算重组能所用基组
-	  qc_memory       = 4096                                              # 计算引擎所用内存（in MB）
-	  qc_nodes        = 1                                                 # 计算引擎申请使用节点数
-	  qc_ppn          = 20                                                # 计算引擎每节点并行运行核数
+	  qc_method       = b3lyp                   # 计算所用方法
+	  qc_basis        = b3lyp cc-pvdz           # 计算所用基组
+	  qc_basis_re     = b3lyp cc-pvdz           # 计算重组能所用基组
+	  qc_memory       = 4096                    # 计算引擎所用内存（in MB）
+	  qc_nodes        = 1                       # 计算引擎申请使用节点数
+	  qc_ppn          = 20                      # 计算引擎每节点并行运行核数
 	   
 
-	  temp            = 300	                                              # 定义模拟温度
+	  temp            = 300	                    # 定义模拟温度
 
 	  # Temperature Dependence
-	  start_temp      = 200                                               # 计算不同温度下的电荷迁移率时，定义模拟初始温度
-	  end_temp        = 300                                               # 计算不同温度下的电荷迁移率时，定义模拟最终温度
-	  delta_temp      = 50	                                              # 定义模拟温度间隔
+	  start_temp      = 200                     # 计算不同温度下的电荷迁移率时，定义模拟初始温度
+	  end_temp        = 300                     # 计算不同温度下的电荷迁移率时，定义模拟最终温度
+	  delta_temp      = 50	                    # 定义模拟温度间隔
 
-	  ratetype        = quantum                                           # marcus or quantum，定义电子空穴迁移速率计算方法
+	  ratetype        = quantum                 # marcus or quantum，定义电子空穴迁移速率计算方法
 
-	  lat_cutoff      = 4                                                 # 计算相邻转移积分的截断半径(单位:Å)	
-      super-cell      = 4 4 4                                             # Monte Carlo 模拟超胞大小的三维尺寸
+	  lat_cutoff      = 4                       # 计算相邻转移积分的截断半径(单位:Å)	
+      super-cell      = 4 4 4                   # Monte Carlo 模拟超胞大小的三维尺寸
 
-	  nsimu           = 2000                                              # 定义总模拟次数
-	  tsimu           = 1000                                              # 定义总模拟时间（in ns）
-	  tsnap           = 5	                                              # 定义记录输出文件中的载流子位置的时间间隔
+	  nsimu           = 2000                    # 定义总模拟次数
+	  tsimu           = 1000                    # 定义总模拟时间（in ns）
+	  tsnap           = 5	                    # 定义记录输出文件中的载流子位置的时间间隔
 
-	  crystal         = naphthalene.cif                                   # 晶体文件
+	  crystal         = naphthalene.cif         # 晶体文件
 	/
 
 
@@ -191,8 +191,8 @@ SYS.dat，
 
 .. code-block:: bash
 
-	do_transport_submit_HL_job        = 1                               # 是否开启计算转移积分, 1表示开启，0表示关闭
-	do_transport_get_transferintegral = 1                               # 计算计算转移积分, 1表示开启，0表示关闭
+    do_transport_submit_HL_job        = 1                               # 是否开启计算转移积分, 1表示开启，0表示关闭
+    do_transport_get_transferintegral = 1                               # 计算计算转移积分, 1表示开启，0表示关闭
     do_transport_submit_RE_job        = 1                               # 计算重整能, 1表示开启，0表示关闭
 
 
