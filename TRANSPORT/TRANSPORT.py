@@ -104,7 +104,7 @@ def do_transport_get_mob_MC_temp(int):
     """
 
 def do_transport_run_ME(int):
-    """ME 方面模拟, 1表示开启，0表示关闭
+    """ME 方法模拟, 1表示开启，0表示关闭
 
     Args:
         1 (Default): 0
@@ -150,7 +150,7 @@ def do_transport_get_mob_ME_temp(int):
     """
 
 def do_transport_gather_momap_data(int):
-    """收集打印电荷疏运计算的相关数据, 1表示开启，0表示关闭
+    """收集计算的相关数据, 1表示开启，0表示关闭
 
     Args:
         1 (Default): 0
@@ -201,7 +201,7 @@ def temp(float):
 
     Example:
         >>> &transport
-        >>>     temp = 200     
+        >>>     temp = 300     
     """
 
 

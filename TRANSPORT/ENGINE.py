@@ -79,7 +79,7 @@ def qc_basis_re(str):
     """
 
 def qc_memory(str):
-    """计算引擎所用内存（in Mega）
+    """计算引擎所用内存（in MB）
 
     Args:
         4096 (Default)

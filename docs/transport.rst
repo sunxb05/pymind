@@ -6,7 +6,6 @@
 
 输入文件
 =======
-吸收光谱、荧光光谱以及辐射速率的计算流程以 azulene 为例，算例数据位于 momap/example/azulene/目录下。
 
 1. 萘分子晶体结构文件
 ----------------------
@@ -89,67 +88,62 @@
 .. code-block:: bash
 
 	&transport
-	  do_transport_prepare              = 1
-	  do_transport_submit_HL_job        = 1
-	  do_transport_get_transferintegral = 1
-	  do_transport_submit_RE_job        = 1
-	  do_transport_get_re_evc           = 1
-	  do_transport_run_MC               = 1
-	  do_transport_get_mob_MC           = 1
-	  do_transport_run_MC_temp          = 0
-	  do_transport_get_mob_MC_temp      = 0
-	  do_transport_run_ME               = 0
-	  do_transport_get_mob_ME           = 0
-	  do_transport_run_ME_temp          = 0
-	  do_transport_get_mob_ME_temp      = 0
-	  do_transport_gather_momap_data    = 0	
+	  do_transport_prepare              = 1                               # 是否生成预备文件, 1表示开启，0表示关闭
+	  do_transport_submit_HL_job        = 1                               # 是否开启计算转移积分, 1表示开启，0表示关闭
+	  do_transport_get_transferintegral = 1                               # 计算计算转移积分, 1表示开启，0表示关闭
+	  do_transport_submit_RE_job        = 1                               # 计算重整能, 1表示开启，0表示关闭
+	  do_transport_get_re_evc           = 1                               # 使用 evc 程序分析重整能, 1表示开启，0表示关闭
+	  do_transport_run_MC               = 1                               # Monte Carlo 模拟, 1表示开启，0表示关闭
+	  do_transport_get_mob_MC           = 1                               # 计算迁移率, 1表示开启，0表示关闭
+	  do_transport_run_MC_temp          = 0                               # 不同温度下的Monte Carlo 模拟, 1表示开启，0表示关闭
+	  do_transport_get_mob_MC_temp      = 0                               # 计算不同温度下的迁移率, 1表示开启，0表示关闭
+	  do_transport_run_ME               = 0                               # ME 方法模拟, 1表示开启，0表示关闭
+	  do_transport_get_mob_ME           = 0                               # ME 方法计算迁移率, 1表示开启，0表示关闭
+	  do_transport_run_ME_temp          = 0                               # 不同温度下的 ME 模拟, 1表示开启，0表示关闭
+	  do_transport_get_mob_ME_temp      = 0                               # 计算不同温度下的迁移率, 1表示开启，0表示关闭
+	  do_transport_gather_momap_data    = 0	                              # 收集计算的相关数据, 1表示开启，0表示关闭
 
-	  # Job Scheduling
-	  queue_name      = workq
-	  sched_type      = local    ! pbs, slurm, lsf, or local	
+	  # Job Scheduling 
+	  queue_name      = workq                                             # 计算任务提交队列
+	  sched_type      = local                               	          # pbs, slurm, lsf, or local， 作业管理系统
 
-	  compute_engine  = 1      ! 1 = Gaussian, 2 = ORCA, 3 = QCHEM
-	  qc_exe          = g09    ! g09/g16 or fullpath/orca or qchem	
+	  compute_engine  = 1                                                 # 1 = Gaussian, 2 = ORCA, 3 = QCHEM， 4 = BDF， 定义使用的计算引擎
+	  qc_exe          = g09                                               # g09/g16 or fullpath/orca or qchem or BDF， 计算引擎可执行程序
 
-	  module_mpich2 = momap/devel
-	  module_qc = gaussian/g09.e01	
+	  module_mpich2 = momap/devel                                         # MOMAP路径
+	  module_qc = gaussian/g09.e01	                                      # 计算引擎路径
 
-	  qc_method       = b3lyp
-	  qc_basis        = b3lyp cc-pvdz
-	  qc_basis_re     = b3lyp cc-pvdz
-	  qc_memory       = 4096  ! MB
-	  qc_nodes        = 1
-	  qc_ppn          = 20
-	  
-	  RE_use_neutral_chk = 1
-	# RE_calc_lambda_4P = 1
-	# lat_site_energy = 1
-	# app_elec_F      = 1e8 0 0	
+	  qc_method       = b3lyp                                             # 计算所用方法
+	  qc_basis        = b3lyp cc-pvdz                                     # 计算所用基组
+	  qc_basis_re     = b3lyp cc-pvdz                                     # 计算重组能所用基组
+	  qc_memory       = 4096                                              # 计算引擎所用内存（in MB）
+	  qc_nodes        = 1                                                 # 计算引擎申请使用节点数
+	  qc_ppn          = 20                                                # 计算引擎每节点并行运行核数
+	   
 
-	  temp            = 300	
+	  temp            = 300	                                              # 定义模拟温度
 
 	  # Temperature Dependence
-	  start_temp      = 200
-	  end_temp        = 300
-	  delta_temp      = 50	
+	  start_temp      = 200                                               # 计算不同温度下的电荷迁移率时，定义模拟初始温度
+	  end_temp        = 300                                               # 计算不同温度下的电荷迁移率时，定义模拟最终温度
+	  delta_temp      = 50	                                              # 定义模拟温度间隔
 
-	  ratetype        = quantum  ! marcus or quantum	
+	  ratetype        = quantum                                           # marcus or quantum，定义电子空穴迁移速率计算方法
 
-	  lat_cutoff      = 4       ! for neighbor list construction	
+	  lat_cutoff      = 4                                                 # 计算相邻转移积分的截断半径(单位:Å)	
+      super-cell      = 4 4 4                                             # Monte Carlo 模拟超胞大小的三维尺寸
 
-	  nsimu           = 2000
-	  tsimu           = 1000    ! in ns
-	  tsnap           = 5	
+	  nsimu           = 2000                                              # 定义总模拟次数
+	  tsimu           = 1000                                              # 定义总模拟时间（in ns）
+	  tsnap           = 5	                                              # 定义记录输出文件中的载流子位置的时间间隔
 
-	  crystal         = naphthalene.cif
+	  crystal         = naphthalene.cif                                   # 晶体文件
 	/
 
 
-执行以下命令运行 EVC 振动分析程序:
+执行以下命令运行程序:
 
 	``momap –input momap.inp –nodefile nodefile``
-
-程序正常结束后，得到下一步计算的输入文件 evc.cart.dat。
 
 
 
@@ -159,37 +153,14 @@
 
 
 
-.. important ::
+计算过程及结果
+============
 
-   	MOMAP支持并行运算，如果使用队列脚本(如 PBS 脚本)提交任务，则只需在 PBS 脚本中修改提交队列名称、使用节点数量和核数量。
-
-   	如果不使用队列脚本，可以在 nodefile 里 指定节点名称和核数。例如:需要使用节点名称为 node1 和 node2 的两个节点，每个节点上使用 2 个核。则 nodefile 写为 ::
-
-	    node1 	
-	    node1 	
-	    node2 	
-	    node2
-
-
-
-
-计算结束后得到 azulene-s1.chk 和 azulene-s1.log 输出文件。
-使用以下指令对二进制的 checkpoint 文件进行转换: 
-
-	``formchk azulene-s1.chk``
-
-运行结束后生成文件 azulene-s1.fchk，azulene-s1.flog 和 azulene-s1.fchk 这两个文件将用于后续的振动分析计算。
-
-
-
-
-计算过程
-========
+文件 momap.inp 按照迁移率计算的的原理定义了不同步骤。
 
 
 1. 生成预备文件文件
 ----------------
-
 
 
 计算的第一步需要产生重整能和转移积分计算的 Gaussian 输入文件，在文件 momap.inp 中设置此步骤的开关:
@@ -197,182 +168,81 @@
 
 .. code-block:: bash
 
-	do_evc          = 1                      # 1 表示开启dushin计算，0 表示关闭
-
-	&evc
-	  ffreq(1)      = "azulene-s0.log"       #基态结果的日志文件
-	  ffreq(2)      = "azulene-s1.log"       #激发态结果的日志文件
-	/
+	do_transport_prepare              = 1                               # 是否生成预备文件, 1表示开启，0表示关闭
 
 
-执行以下命令运行 EVC 振动分析程序:
+可以得到萘分子近邻文件: 
 
-	``momap –input momap.inp –nodefile nodefile``
+neighbor01.xyz，
+neighbor02.xyz，
+NEIGHBOR.dat，
+SYS.dat，
+01/，
+02/
 
-程序正常结束后，得到下一步计算的输入文件 evc.cart.dat。
 
-
-
-.. seealso ::
-
-	 对以上MOMAP输入变量的解释，请参考API Reference部分.
+其中 neighbor01.xyz，neighbor02.xyz 的文件分别是第一个和第二个分子的近邻信息。目录 01/，02/下存有 Gaussian 输入文件。NEIGHBOR.dat，SYS.dat 是所有 分子近邻信息的文件。
 
 
 
-.. important ::
+2. 计算转移积分和重整能
+--------------------
 
-   	MOMAP支持并行运算，如果使用队列脚本(如 PBS 脚本)提交任务，则只需在 PBS 脚本中修改提交队列名称、使用节点数量和核数量。
-
-   	如果不使用队列脚本，可以在 nodefile 里 指定节点名称和核数。例如:需要使用节点名称为 node1 和 node2 的两个节点，每个节点上使用 2 个核。则 nodefile 写为 ::
-
-	    node1 	
-	    node1 	
-	    node2 	
-	    node2
-
-
-
-
-
-3. 辐射速率
-----------
-
-
-a. 辐射速率输入文件 momap.inp:
-++++++++++++++++++++++++++++
 
 .. code-block:: bash
 
-	do_spec_tvcf_ft   = 1                   #1 表示开启计算荧光关联函数
-	do_spec_tvcf_spec = 1	                #1 表示开启计算荧光光谱
-
-	&spec_tvcf                              #描述计算内容
-	  DUSHIN        True                    #是否考虑 Duschinsky 转动(t 开启，f 关闭)
-	  Temp          300                     #温度
-	  tmax          1000                    #积分时间
-	  dt            1                       #积分步长
-	  Ead           0.07509                 #绝热激发能
-	  EDMA          0.92694                 #吸收跃迁偶极矩
-	  EDME          0.64751                 #发射跃迁偶极矩
-	  FreqScale     1.0                     #频率缩放因子
-	  DSFile        "evc.cart.dat"          #定义读取的 evc 文件名
-	  Emax          0.3 au                  #定义光谱频率范围上限
-	  dE            0.00001                 #定义输出能量间隔
-	  logFile       "spec.tvcf.log"         #定义输出 log 文件名
-	  FtFile        "spec.tvcf.ft.dat"      #定义输出的关联函数文件名
-	  FoFile        "spec.tvcf.fo.dat"      #谱函数输出文件
-	  FoSFile       "spec.tvcf.spec.dat"    #归一化的光谱输出文件
-	/
-
-
-.. seealso ::
-
-	 对以上MOMAP输入变量的解释，请参考API Reference部分.
-
-
-把 momap.inp 文件、nodefile 文件和 4.1.2 部分计算得到的 evc.cart.dat 文件 放置于同一目录，运行以下命令进行计算:
-
-	``momap –input momap.inp –nodefile nodefile``
+	do_transport_submit_HL_job        = 1                               # 是否开启计算转移积分, 1表示开启，0表示关闭
+	do_transport_get_transferintegral = 1                               # 计算计算转移积分, 1表示开启，0表示关闭
+    do_transport_submit_RE_job        = 1                               # 计算重整能, 1表示开启，0表示关闭
 
 
 
-b. 计算结果解读:
-+++++++++++++++++++
-
-运行结束后会得到结果文件：
-
-.. csv-table::
-    :header: "输出文件名", "输出文件内容"
-
-      spec.tvcf.fo.dat    ,             谱函数输出文件
-      spec.tvcf.ft.dat    ,             关联函数输出文件
-      spec.tvcf.log       ,             log 文件
-      spec.tvcf.spec.dat  ,             光谱文件
-
-
-1) 计算完成后先确认关联函数是否收敛，将 spec.tvcf.ft.dat 的前两列画图，若随着积分时间的增加，纵坐标的值基本为 0 且呈直线，则表示关联函数已经收敛。
-
-
-
-2) 确认关联函数收敛后，根据光谱文件 spec.tvcf.spec.dat，选取所需数据画出 相关的吸收光谱和发射光谱:
-
-
-3) 辐射速率 kr 可在 spec.tvcf.log 文件末端读取。如下图所示，第一个数值和第 二个数值都表示辐射速率，单位分别是 au 和 s-1，第三个数值表示寿命。计算得 到 azulene 分子的辐射速率 kr 为 2.72281554×105s-1。
+计算完成后会产生 Gaussian 计算得到的重整能和转移积分计算结果，文件存放在 目录 RE/下的 log 和 fchk 文件中。
+其中 VH01.dat，VH02.dat，VL01.dat，VL02.dat 文件，可以得到 01、02 分子和 4 个近邻间的 HUMO 和 LOMO 能级的转移积分。同时在 transferintegral/目录下得到不同分子与紧邻间的 HOMO 和 LUMO 能级的转移积 分:01/H.dat，01/L.dat，02/H.dat，02/L.dat。其中 01、02 表示第一、第二个分 子。H和L分别代表HOMO和LUMO能级。
 
 
 
 
-
-4. 非辐射速率
+3. 分析重整能
 ------------
 
-本部分计算文件在 azulene/kic/目录下。
-
-计算内转换过程不仅需要分子基态 S0 与激发态 S1 的构型优化结果、频率计算结果，还需要包含与**非绝热耦合矩阵元相关的 azulene-nacme.log 文件**。非绝热 耦合计算时使用的计算方法、泛函等尽量与构型优化时保持一致。
-
-a. 非绝热耦合矩阵元:
-++++++++++++++++++
-
-本部分计算文件在 azulene/kic/nacme/目录下。
-
-在 S0 最稳定构型下设置关键词为:
 
 .. code-block:: bash
 
-	#p td B3lyp/6-31G(d) prop=(fitcharge,field) iop(6/22=-4, 6/29=1, 6/30=0, 6/17=2) nosymm
+	do_transport_get_re_evc           = 1                               # 使用 evc 程序分析重整能, 1表示开启，0表示关闭
 
 
-b. 振动分析(EVC):
-++++++++++++++++++
+在目录 evc/目录下文件 lamda.dat 存有电子和空穴重整能。其中 lam1 是指电 中性的分子处在平衡结构上和在带点结构上的能量之差。lam2 是指带电的离子 处在平衡结构和在电中性的分子上的能量之差。
 
-本部分计算文件在相关算例 azulene/kic/evc/目录下。
-
-收集基态、激发态计算结果文件，包括日志文件 (azulene-s0.log 和 azulene-s1.log)和格式化的 Checkpoint 文件(azulene-s0.fchk 和 azulene-s1.fchk)，注意需保证振动结果无虚频。此外，还有 非绝热耦合矩阵元相关的 azulene-nacme.log 文件。将这些文件都放在同一个目录中，编写 EVC 振动分析的输入文件 momap.inp
-
-.. code-block:: bash
-
-	do_evc          = 1                      #1 表示开启dushin计算，0 表示关闭
-
-	&evc
-	  ffreq(1)      = "azulene-s0.log"       #基态结果的日志文件
-	  ffreq(2)      = "azulene-s1.log"       #激发态结果的日志文件
-	  fnacme        = "azulene-nacme.log"    #非绝热耦合文件
-
-	/
+目录 evc/elec/下的 NM.dat 文件包含不同振动频率下的重整能和黄昆因子
 
 
-执行以下命令运行 EVC 振动分析程序:
+4. 随机行走模拟
+--------------------
 
-	``momap –input momap.inp –nodefile nodefile``
-
-程序正常结束后，得到下一步计算的输入文件 evc.cart.dat 和 evc.cart.nac。
-
-
-c. 非辐射速率输入文件 momap.inp:
-+++++++++++++++++++++++++++++
-
+这一步使用了蒙特卡罗的方法模拟了电子运动的轨迹，并由此计算迁移率
 
 .. code-block:: bash
 
-	do_ic_tvcf_ft   = 1                   #1 表示开启计算内转换关联函数
-	do_ic_tvcf_spec = 1	                #1 表示开启计算内转换光谱
+	do_transport_run_MC               = 1                               # Monte Carlo 模拟, 1表示开启，0表示关闭
+	do_transport_get_mob_MC           = 1                               # 计算迁移率, 1表示开启，0表示关闭
 
-	&spec_tvcf                              #描述计算内容
-	  DUSHIN        True                    #是否考虑 Duschinsky 转动(t 开启，f 关闭)
-	  Temp          300                     #温度
-	  tmax          1000                    #积分时间
-	  dt            1                       #积分步长
-	  Ead           0.07509                 #绝热激发能
-	  DSFile        "evc.cart.dat"          #定义读取的 evc 文件名
-	  CoulFile      "evc.cart.nac"          #定义读取的 nacme 文件名
-	  Emax          0.3 au                  #定义光谱频率范围上限
-	  dE            0.00001                 #定义输出能量间隔
-	  logFile       "spec.tvcf.log"         #定义输出 log 文件名
-	  FtFile        "spec.tvcf.ft.dat"      #定义输出的关联函数文件名
-	  FoFile        "spec.tvcf.fo.dat"      #谱函数输出文件
-	/
 
-d. 计算结果解读:
-+++++++++++++++++++
+计算后得到不同近邻间 HOMO、LUMO 能级迁移速率，分别在文件 WH01.dat， WH02.dat，WL01.dat，WL02.dat 中。
 
-运行结束后会得到结果文件与相应解读与辐射速率结果类似。
+
+
+5. 不同温度下随机行走模拟
+---------------------------
+
+用户也可以使用蒙特卡罗的方法模拟不同温度情况下的电子运动的轨迹，并由此计算迁移率
+
+.. code-block:: bash
+
+	do_transport_run_MC_temp          = 1                               # 不同温度下的Monte Carlo 模拟, 1表示开启，0表示关闭
+	do_transport_get_mob_MC_temp      = 1                               # 计算不同温度下的迁移率, 1表示开启，0表示关闭
+
+
+计算得到的电子和空穴迁移率分别在目录 MC-quantu-temp(或者MC-marcus-temp)/下的 mob-e.dat 和 mob-h.dat 文件中。
+
+
