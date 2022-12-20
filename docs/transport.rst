@@ -168,7 +168,7 @@
 
 .. code-block:: bash
 
-	do_transport_prepare              = 1                               # 是否生成预备文件, 1表示开启，0表示关闭
+	do_transport_prepare              = 1       # 是否生成预备文件, 1表示开启，0表示关闭
 
 
 可以得到萘分子近邻文件: 
@@ -191,9 +191,9 @@ SYS.dat，
 
 .. code-block:: bash
 
-    do_transport_submit_HL_job        = 1                               # 是否开启计算转移积分, 1表示开启，0表示关闭
-    do_transport_get_transferintegral = 1                               # 计算计算转移积分, 1表示开启，0表示关闭
-    do_transport_submit_RE_job        = 1                               # 计算重整能, 1表示开启，0表示关闭
+    do_transport_submit_HL_job        = 1       # 是否开启计算转移积分, 1表示开启，0表示关闭
+    do_transport_get_transferintegral = 1       # 计算计算转移积分, 1表示开启，0表示关闭
+    do_transport_submit_RE_job        = 1       # 计算重整能, 1表示开启，0表示关闭
 
 
 
@@ -209,7 +209,7 @@ SYS.dat，
 
 .. code-block:: bash
 
-	do_transport_get_re_evc           = 1                               # 使用 evc 程序分析重整能, 1表示开启，0表示关闭
+	do_transport_get_re_evc           = 1       # 使用 evc 程序分析重整能, 1表示开启，0表示关闭
 
 
 在目录 evc/目录下文件 lamda.dat 存有电子和空穴重整能。其中 lam1 是指电 中性的分子处在平衡结构上和在带点结构上的能量之差。lam2 是指带电的离子 处在平衡结构和在电中性的分子上的能量之差。
@@ -224,8 +224,8 @@ SYS.dat，
 
 .. code-block:: bash
 
-	do_transport_run_MC               = 1                               # Monte Carlo 模拟, 1表示开启，0表示关闭
-	do_transport_get_mob_MC           = 1                               # 计算迁移率, 1表示开启，0表示关闭
+	do_transport_run_MC               = 1        # Monte Carlo 模拟, 1表示开启，0表示关闭
+	do_transport_get_mob_MC           = 1        # 计算迁移率, 1表示开启，0表示关闭
 
 
 计算后得到不同近邻间 HOMO、LUMO 能级迁移速率，分别在文件 WH01.dat， WH02.dat，WL01.dat，WL02.dat 中。
@@ -239,8 +239,8 @@ SYS.dat，
 
 .. code-block:: bash
 
-	do_transport_run_MC_temp          = 1                               # 不同温度下的Monte Carlo 模拟, 1表示开启，0表示关闭
-	do_transport_get_mob_MC_temp      = 1                               # 计算不同温度下的迁移率, 1表示开启，0表示关闭
+	do_transport_run_MC_temp          = 1        # 不同温度下的Monte Carlo 模拟, 1表示开启，0表示关闭
+	do_transport_get_mob_MC_temp      = 1        # 计算不同温度下的迁移率, 1表示开启，0表示关闭
 
 
 计算得到的电子和空穴迁移率分别在目录 MC-quantu-temp(或者MC-marcus-temp)/下的 mob-e.dat 和 mob-h.dat 文件中。
