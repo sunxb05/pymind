@@ -562,7 +562,7 @@ a. 辐射速率输入文件 momap.inp:
 	 对以上MOMAP输入变量的解释，请参考API Reference部分.
 
 
-把 momap.inp 文件、nodefile 文件和 EVC 部分计算得到的 evc.cart.dat 文件 放置于同一目录，运行以下命令进行计算:
+把 momap.inp 文件、nodefile 文件和 EVC 部分计算得到的 evc.cart.dat 文件放置于同一目录，运行以下命令进行计算:
 
 	``momap –input momap.inp –nodefile nodefile``
 
