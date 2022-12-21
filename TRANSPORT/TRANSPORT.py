@@ -175,7 +175,7 @@ def molecule(str):
     """定义晶体文件
 
     Args:
-        "2 mol1.mol mol2.mol" (Default)
+        (2 mol1.mol mol2.mol) (Default)
 
     Example:
         >>> &transport
@@ -198,7 +198,7 @@ def neighbor_scell(float):
     """for neighbor cell search
 
     Args:
-        3 3 3 (Default)
+        (3 3 3) (Default)
 
     Example:
         >>> &transport
@@ -209,7 +209,7 @@ def super_cell(float):
     """for ME calculations
 
     Args:
-        5 5 5 (Default)
+        (5 5 5) (Default)
 
     Example:
         >>> &transport
@@ -372,7 +372,7 @@ def Thinfilm(int):
     nuc is the number of repeating unit cell in dir direction, e.g., thinfilm = 0 2
 
     Args:
-         0 2 (Default)
+         (0 2) (Default)
 
     Example:
         >>> &transport
