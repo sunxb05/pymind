@@ -172,10 +172,8 @@ def crystal(str):
     """
 
 def molecule(str):
-    """定义晶体文件
+    """定义晶体文件, default  2 mol1.mol mol2.mol
 
-    Args:
-        (2 mol1.mol mol2.mol) (Default)
 
     Example:
         >>> &transport
@@ -195,10 +193,8 @@ def lat_cutoff(float):
     """
 
 def neighbor_scell(float):
-    """for neighbor cell search
+    """for neighbor cell search, defalut 3 3 3
 
-    Args:
-        (3 3 3) (Default)
 
     Example:
         >>> &transport
@@ -206,10 +202,8 @@ def neighbor_scell(float):
     """
 
 def super_cell(float):
-    """for ME calculations
+    """for ME calculations, defalut 5 5 5
 
-    Args:
-        (5 5 5) (Default)
 
     Example:
         >>> &transport
@@ -371,8 +365,6 @@ def Thinfilm(int):
     """Format: thinfilm = dir nuc, here dir can be 0(vector_a), 1(vector_b), and 2(vector_c), 
     nuc is the number of repeating unit cell in dir direction, e.g., thinfilm = 0 2
 
-    Args:
-         (0 2) (Default)
 
     Example:
         >>> &transport
