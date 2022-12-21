@@ -3,26 +3,25 @@
 .. code-block:: bash
 
 
-    do_spec_tvcf_ft = 1
-    do_spec_tvcf_spec = 1   
-    
+    do_spec_tvcf_ft   = 1
+    do_spec_tvcf_spec = 1    
 
     &spec_tvcf      
-        DUSHIN      = .t.
-        Temp        = 300 K
-        tmax        = 5000 fs
-        dt          = 0.001 fs
-        Ead         = 0.075091878 au
-        EDMA        = 0.92694 debye
-        EDME        = 0.64751 debye 
-        FreqScale   = 1.0
-        DSFile      = "evc.cart.dat"
-        Emax        = 0.3 au
-        dE          = 0.00001 au
-        logFile     = "spec.tvcf.log" 
-        FtFile      = "spec.tvcf.ft.dat" 
-        FoFile      = "spec.tvcf.fo.dat" 
-        FoSFile     = "spec.tvcf.spec.dat"  
+        DUSHIN        = .t.
+        Temp          = 300 K
+        tmax          = 5000 fs
+        dt            = 0.001 fs
+        Ead           = 0.075091878 au
+        EDMA          = 0.92694 debye
+        EDME          = 0.64751 debye 
+        FreqScale     = 1.0
+        DSFile        = "evc.cart.dat"
+        Emax          = 0.3 au
+        dE            = 0.00001 au
+        logFile       = "spec.tvcf.log" 
+        FtFile        = "spec.tvcf.ft.dat" 
+        FoFile        = "spec.tvcf.fo.dat" 
+        FoSFile       = "spec.tvcf.spec.dat"  
 
     /
 
@@ -32,21 +31,21 @@ A typical **ic_tvcf** control with momap.inp can be as follows:
 
 .. code-block:: bash
 
-    do_ic_tvcf_ft 
-    do_ic_tvcf_spec =1  
-    &ic_tvcf    
+    do_ic_tvcf_ft     =1  
+    do_ic_tvcf_spec   =1  
 
-        DUSHIN      = .t.
-        Temp        = 300 K
-        tmax        = 5000 fs
-        dt          = 0.001 fs
-        Ead         = 0.075091878 au
-        DSFile      = "evc.cart.dat"
-        CoulFile    = "evc.cart.nac"
-        Emax        = 0.3 au
-        logFile     = "ic.tvcf.log"
-        FtFile      = "ic.tvcf.ft.dat"
-        FoSFile     = "ic.tvcf.fo.dat"  
+    &ic_tvcf    
+        DUSHIN        = .t.
+        Temp          = 300 K
+        tmax          = 5000 fs
+        dt            = 0.001 fs
+        Ead           = 0.075091878 au
+        DSFile        = "evc.cart.dat"
+        CoulFile      = "evc.cart.nac"
+        Emax          = 0.3 au
+        logFile       = "ic.tvcf.log"
+        FtFile        = "ic.tvcf.ft.dat"
+        FoSFile       = "ic.tvcf.fo.dat"  
 
     /
 
@@ -57,21 +56,21 @@ A typical **isc_tvcf** control with momap.inp can be as follows:
 
 .. code-block:: bash
 
-    do_isc_tvcf_ft = 1
-    do_isc_tvcf_spec = 1    
-    &isc_tvcf   
+    do_isc_tvcf_ft    = 1
+    do_isc_tvcf_spec  = 1    
 
-        DUSHIN      = .t.
-        Temp        = 298 K
-        tmax        = 5000 fs
-        dt          = 0.001 fs
-        Ead         = 0.0941829 au
-        Hso         = 176.08 cm-1 
-        DSFile      = "evc.cart.dat" 
-        Emax        = 0.3 au
-        logFile     = "isc.tvcf.log" 
-        FtFile      = "isc.tvcf.ft.dat" 
-        FoFile      = "isc.tvcf.fo.dat"
+    &isc_tvcf   
+        DUSHIN        = .t.
+        Temp          = 298 K
+        tmax          = 5000 fs
+        dt            = 0.001 fs
+        Ead           = 0.0941829 au
+        Hso           = 176.08 cm-1 
+        DSFile        = "evc.cart.dat" 
+        Emax          = 0.3 au
+        logFile       = "isc.tvcf.log" 
+        FtFile        = "isc.tvcf.ft.dat" 
+        FoFile        = "isc.tvcf.fo.dat"
     /
 
 
