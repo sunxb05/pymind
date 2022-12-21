@@ -166,43 +166,43 @@ def Ead(float):
     """ 绝热激发能，可由Gaussian等软件计算得到
 
     Args:
-        0.05 (Default)
+        0.097374 (Default)
  
 
     Example:
         >>> &spec_tvcf
-        >>>     Ead      = 0.075091878 au    
+        >>>     Ead      = 0.097374 au   
     """
 
 def EDMA(float):
     """ 吸收跃迁偶极矩，可由Gaussian等软件计算得到
 
     Args:
-        0.05 (Default)
+        0.7887 (Default)
  
 
     Example:
         >>> &spec_tvcf
-        >>>     EDMA      = 0.92694 debye   
+        >>>     EDMA      = 0.7887 debye   
     """
 
 def EDME(float):
     """ 发射跃迁偶极矩，可由Gaussian等软件计算得到
 
     Args:
-        0.05 (Default)
+        1.0368  (Default)
  
 
     Example:
         >>> &spec_tvcf
-        >>>     EDME      = 0.64751 debye   
+        >>>     EDME      = 1.0368  debye   
     """
 
 def Hso(float):
     """ 旋轨耦合常数，可由Dalton等软件计算得到，用于系间窜越计算
 
     Args:
-        100 (Default)
+        10 (Default)
  
 
     Example:
@@ -215,7 +215,7 @@ def Temp(float):
     """ 定义温度
 
     Args:
-        300 (Default)
+        10 (Default)
  
 
     Example:
@@ -227,24 +227,24 @@ def tmax(float):
     """ 定义积分时间
 
     Args:
-        1000 (Default)
+        5000 (Default)
  
 
     Example:
         >>> &spec_tvcf
-        >>>     tmax      = 1000 fs    
+        >>>     tmax      = 3000 fs    
     """
 
 def dt(float):
     """ 定义积分步长
 
     Args:
-        0.01 (Default)
+        0.001 (Default)
  
 
     Example:
         >>> &spec_tvcf
-        >>>     dt      = 0.01 fs    
+        >>>     dt      = 0.001 fs    
     """
 
 
@@ -271,6 +271,31 @@ def dE(float):
         >>> &spec_tvcf
         >>>     dE      = 0.00001 au   
     """
+
+def isgauss(logic):
+    """是否开启 spectrum broadening， t表示开启，f表示关闭
+
+    Args:
+        .f. (Default): .t. 
+
+    Example:
+        >>> &spec_tvcf
+        >>>     isgauss      = .f.        
+    """
+
+
+def FWHM(float):
+    """ Broadening width
+
+    Args:
+        0.001 (Default)
+ 
+
+    Example:
+        >>> &spec_tvcf
+        >>>     FWHM      = 0.001 au   
+    """
+
 
 def DSFile(str):
     """定义读取的 evc 文件名
@@ -352,5 +377,14 @@ def FoSFile(str):
         >>>     FoSFile = "spec.tvcf.spec.dat"      
     """
 
+def GFile(str):
+    """Output file for broadening info
 
+    Args:
+        "spec.tvcf.gauss.dat" (Default)
+
+    Example:
+        >>> &spec_tvcf
+        >>>     GFile = "spec.tvcf.gauss.dat"      
+    """
 

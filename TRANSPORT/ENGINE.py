@@ -11,22 +11,22 @@ def compute_engine(int):
         >>>     compute_engine      = 1      
     """
 
-def module_mpich2(str):
-    """MOMAP路径
+def module_momap(str):
+    """MOMAP程序
 
     Args:
         momap (Default)
 
     Example:
         >>> &transport
-        >>>     module_mpich2 = momap      
+        >>>     module_momap =  momap/2022B-openmpi      
     """
 
 def module_qc(str):
-    """计算引擎路径
+    """Use module to setup QC running environment
 
     Args:
-        gaussian/g09.e01 (Default)
+        empty (Default)
 
     Example:
         >>> &transport
@@ -68,7 +68,7 @@ def qc_basis(str):
     """
 
 def qc_basis_re(str):
-    """计算引擎计算重组能所用基组
+    """计算重组能所用基组,无设置的话与qc_basis相同
 
     Args:
         b3lyp cc-pvdz (Default)
@@ -78,8 +78,8 @@ def qc_basis_re(str):
         >>>     qc_basis_re = b3lyp cc-pvdz      
     """
 
-def qc_memory(str):
-    """计算引擎所用内存（in MB）
+def qc_memory(int):
+    """所用内存（in MB）
 
     Args:
         4096 (Default)
@@ -89,8 +89,8 @@ def qc_memory(str):
         >>>     qc_memory = 4096      
     """
 
-def qc_nodes(str):
-    """计算引擎申请使用节点数
+def qc_nodes(int):
+    """申请使用节点数
 
     Args:
         1 (Default)
@@ -100,11 +100,11 @@ def qc_nodes(str):
         >>>     qc_nodes = 1      
     """
 
-def qc_ppn(str):
-    """计算引擎每节点并行运行核数
+def qc_ppn(int):
+    """每节点并行运行核数
 
     Args:
-        20 (Default)
+        8 (Default)
 
     Example:
         >>> &transport
@@ -131,4 +131,37 @@ def sched_type(str):
     Example:
         >>> &transport
         >>>     sched_type = local      
+    """
+
+def job_slot_limit(int):
+    """number of jobs at the same time, default to 0, means no limit
+
+    Args:
+        0 (Default)
+
+    Example:
+        >>> &transport
+        >>>     job_slot_limit = 0   
+    """
+
+def walltime_hour(int):
+    """setting walltime in job submission scripts
+
+    Args:
+        1000 (Default)
+
+    Example:
+        >>> &transport
+        >>>     walltime_hour = 1000   
+    """ 
+
+def scratch(str):
+    """/tmp, only valid for ORCA calculation.
+
+    Args:
+        /tmp (Default)
+
+    Example:
+        >>> &transport
+        >>>     scratch = /tmp      
     """

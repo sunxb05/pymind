@@ -3,16 +3,16 @@
 .. code-block:: bash
 
 
-    do_spec_sums   = 1    
+    do_spec_sums    = 1    
 
     &spec_sums      
-        DSFile     = "evc.cart.dat"
-        Ead        = 0.075092 au
-        dipole_abs = 0.92694 debye
-        dipole_emi = 0.64751 debye
-        maxvib     = 10
-        if_cal_ic  = .t.
-        promode    = 24
+        DSFile      = "evc.cart.dat"
+        Ead         = 0.075092 au
+        dipole_abs  = 0.92694 debye
+        dipole_emi  = 0.64751 debye
+        maxvib      = 10
+        if_cal_ic   = .t.
+        promode     = 24
         FC_eps_abs  = 0.1
         FC_eps_emi  = 0.1
         FC_eps_ic   = 0.1
@@ -34,8 +34,6 @@
 """
 
 
-
-
 def do_spec_sums(int):
     """是否开启计算辐射关联函数, 1表示开启，0表示关闭
 
@@ -50,7 +48,7 @@ def Ead(float):
     """ 绝热激发能,可由Gaussian等软件计算得到
 
     Args:
-        0.05 (Default)
+        0 (Default)
  
 
     Example:
@@ -67,14 +65,14 @@ def dipole_abs(float):
 
     Example:
         >>> &spec_sums
-        >>>     dipole_abs      = 0.92694 debye   
+        >>>     dipole_abs      = 0.092694 debye   
     """
 
 def dipole_emi(float):
     """ 发射跃迁偶极矩，可由Gaussian等软件计算得到
 
     Args:
-        0.05 (Default)
+        0.5 (Default)
  
 
     Example:
@@ -87,7 +85,7 @@ def FC_eps_abs(float):
     """ 定义Franck-Condon 因子阈值(吸收)
 
     Args:
-        0.1 (Default)
+        0 (Default)
  
 
     Example:
@@ -99,7 +97,7 @@ def FC_eps_emi(float):
     """ 定义Franck-Condon 因子阈值(辐射)
 
     Args:
-        0.1 (Default)
+        0 (Default)
  
 
     Example:
@@ -111,7 +109,7 @@ def FC_eps_ic(float):
     """ 定义Franck-Condon 因子阈值(内转换)
 
     Args:
-        0.1 (Default)
+        0 (Default)
  
 
     Example:
@@ -146,7 +144,7 @@ def promode(int):
     """ 定义提升模式(内转换通道分析)
 
     Args:
-         24 (Default)
+         0 (Default)
  
 
     Example:
@@ -170,12 +168,48 @@ def Seps(float):
     """ 定义黄昆因子阈值
 
     Args:
-        0.00001 (Default)
+        0 (Default)
  
 
     Example:
         >>> &spec_sums
         >>>     Seps      = 0.00001  
+    """
+
+def eps(float):
+    """ ?
+
+    Args:
+        0 (Default)
+ 
+
+    Example:
+        >>> &spec_sums
+        >>>     eps      = 0.00
+    """
+
+def reduce_eps(float):
+    """ ?
+
+    Args:
+        0 (Default)
+ 
+
+    Example:
+        >>> &spec_sums
+        >>>     reduce_eps      = 0.001
+    """
+
+def blocksize(int):
+    """ ?
+
+    Args:
+         1000 (Default)
+ 
+
+    Example:
+        >>> &spec_sums
+        >>>     blocksize      = 1000
     """
 
 def FreqScale(float):
