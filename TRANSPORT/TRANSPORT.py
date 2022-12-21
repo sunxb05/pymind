@@ -193,7 +193,7 @@ def lat_cutoff(float):
     """
 
 def neighbor_scell(float):
-    """for neighbor cell search, defalut 3 3 3
+    """for neighbor cell search, default 3 3 3
 
 
     Example:
@@ -202,7 +202,7 @@ def neighbor_scell(float):
     """
 
 def super_cell(float):
-    """for ME calculations, defalut 5 5 5
+    """for ME calculations, default 5 5 5
 
 
     Example:
