@@ -3,7 +3,7 @@
 .. code-block:: bash
 
 
-    do_spec_sums = 1    
+    do_spec_sums   = 1    
 
     &spec_sums      
         DSFile     = "evc.cart.dat"
