@@ -3,33 +3,32 @@
 .. code-block:: bash
 
 
-do_spec_sums = 1
+    do_spec_sums = 1    
 
-&spec_sums   
+    &spec_sums      
+        DSFile     = "evc.cart.dat"
+        Ead        = 0.075092 au
+        dipole_abs = 0.92694 debye
+        dipole_emi = 0.64751 debye
+        maxvib     = 10
+        if_cal_ic  = .t.
+        promode    = 24
+        FC_eps_abs  = 0.1
+        FC_eps_emi  = 0.1
+        FC_eps_ic   = 0.1
+        FreqScale   = 1.0
+        FreqEPS     = 0.01
+        Seps        = 0.00001
+        eps         = 0.00
+        debug       = .false.
+        FWHM        = 500 cm-1
+        blocksize   = 1000
+        testpoints  = 1000
+        TEST        = .f.
+        flog        = "spec.sums.log"
+        reduce_eps  = 0.001 
 
-    DSFile     = "evc.cart.dat"
-    Ead        = 0.075092 au
-    dipole_abs = 0.92694 debye
-    dipole_emi = 0.64751 debye
-    maxvib     = 10
-    if_cal_ic  = .t.
-    promode    = 24
-    FC_eps_abs  = 0.1
-    FC_eps_emi  = 0.1
-    FC_eps_ic   = 0.1
-    FreqScale   = 1.0
-    FreqEPS     = 0.01
-    Seps        = 0.00001
-    eps         = 0.00
-    debug       = .false.
-    FWHM        = 500 cm-1
-    blocksize   = 1000
-    testpoints  = 1000
-    TEST        = .f.
-    flog        = "spec.sums.log"
-    reduce_eps  = 0.001
-
-/
+    /
 
 
 """
