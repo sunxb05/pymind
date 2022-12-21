@@ -1,4 +1,41 @@
-"""Documentation about the MOMAP module."""
+"""A typical MOMAP control file momap.inp can be as follows:
+
+
+
+.. code-block:: bash
+
+
+    do_evc                 = 1
+    do_spec_tvcf_ft        = 0
+    do_spec_tvcf_spec      = 0
+    do_ic_tvcf_ft          = 1
+    do_ic_tvcf_spec        = 1
+    do_isc_tvcf_ft         = 0
+    do_isc_tvcf_spec       = 0
+    do_spec_sums           = 0  
+
+    &evc 
+    ...
+    /   
+
+    &spec_tvcf
+    ...
+    /   
+
+    &ic_tvcf 
+    ...
+    /   
+
+    &isc_tvcf 
+    ...
+    /   
+
+    &spec_sums
+    ...
+    /
+
+
+"""
 
 def do_spec_sums(int):
     """是否开启计算辐射关联函数, 1表示开启，0表示关闭

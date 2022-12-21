@@ -1,4 +1,41 @@
-"""Documentation about the EVC module."""
+"""A typical MOMAP control file momap.inp can be as follows:
+
+
+
+.. code-block:: bash
+
+
+    do_evc                 = 1
+    do_spec_tvcf_ft        = 0
+    do_spec_tvcf_spec      = 0
+    do_ic_tvcf_ft          = 1
+    do_ic_tvcf_spec        = 1
+    do_isc_tvcf_ft         = 0
+    do_isc_tvcf_spec       = 0
+    do_spec_sums           = 0  
+
+    &evc 
+    ...
+    /   
+
+    &spec_tvcf
+    ...
+    /   
+
+    &ic_tvcf 
+    ...
+    /   
+
+    &isc_tvcf 
+    ...
+    /   
+
+    &spec_sums
+    ...
+    /
+
+
+"""
 
 
 def do_evc(int):
@@ -15,12 +52,12 @@ def ffreq(str):
     """定义读取的基态或激发态结果的日志文件，可由Gaussian等软件计算得到
 
     Args:
-        “s0.log” (Default)
+        “s0-freq.log” (Default)
 
     Example:
         >>> &evc
-        >>>     ffreq(1) = "azulene-s0.log"
-        >>>     ffreq(2) = "azulene-s1.log"        
+        >>>     ffreq(1) = "s0-freq.log"
+        >>>     ffreq(2) = "s1-freq.log"        
     """
 
 def fnacme(str):
@@ -31,11 +68,11 @@ def fnacme(str):
 
     Example:
         >>> &evc
-        >>>     fnacme = "azulene-nacme.log"      
+        >>>     fnacme = "nacme.log"      
     """
 
 def ftdipd(str):
-    """定义读取的numfreq计算文件，用于Herzberg-Teller 效应的计算
+    """定义读取的DIP输出文件，用于Herzberg-Teller 效应的计算
 
     Args:
         “numfreq-es.out” (Default)
@@ -49,9 +86,9 @@ def sort_mode(int):
     """用于Herzberg-Teller效应的计算
 
     Args:
-        1 (Default): 0
+        0 (Default): 1
 
     Example:
         >>> &evc
-        >>>     sort_mode      = 1      
+        >>>     sort_mode      = 0  
     """
