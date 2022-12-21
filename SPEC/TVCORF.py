@@ -1,5 +1,3 @@
-"""Documentation about the MOMAP module."""
-
 def do_spec_tvcf_ft(int):
     """是否开启计算辐射关联函数, 1表示开启，0表示关闭
 

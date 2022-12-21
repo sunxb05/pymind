@@ -880,7 +880,7 @@ b. 激发态构型优化与频率计算
 	&evc
 	  ffreq(1)      = "porphine-s0.log"       #基态结果的日志文件
 	  ffreq(2)      = "porphine-s1.log"       #激发态结果的日志文件
-	  ftdipd        = "numfreq-es.out"        #输出文件
+	  ftdipd        = "numfreq-es.out"        #DIP计算输出文件
 	  sort_mode     = 1                       #模式
 	/
 
