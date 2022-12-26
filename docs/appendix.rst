@@ -39,6 +39,7 @@ Transition dipole moment (absorption) at the optimized S0 geometry
 =======================================================================
 
 After finding the optimized S0 geometry, we can calculate transition dipole moment (absorption) and vertical excitation energy at this geometry. The route section is set as #p td b3lyp/6-31g*, which runs a calculation at B3LYP/6-31G* level by using the TDDFT method.
+
 When the calculation is completed, find the related information about “Excited State 1” in the output *.log file in order to find the vertical excitation energy and transition dipole moment (absorption) at the optimized S0 geometry. In this example, the information is listed below:
 
 
@@ -56,6 +57,6 @@ When the calculation is completed, find the related information about “Excited
 Hence, the vertical excitation energy at the optimized S0 geometry is 3.3372 eV, and the transition dipole moment (absorption) can be obtained using Dip. S.:
 
 
-.. image:: ./img/functional1_dipole_moment.png
+.. image:: ./img/functional_dipole_moment.png
 
 
