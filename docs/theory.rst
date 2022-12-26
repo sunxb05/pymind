@@ -48,7 +48,7 @@ When the charge transfer rates are defined, the charge transport dynamics can be
 
 .. image:: ./img/f_t_3.png
 
-where Pi is the occupation number of the charge to be on molecule i, and :math:`k{_{ij}` is the charge transfer rate from molecule :math:`{_i}` to :math:`{_j}`. Namely, the population change on state :math:`{_i}` is the difference between the total population transfer from other states to state i and that from state i to other states. The PME can be solved directly through an iterative numerical scheme. One needs to set the initial populations on all states and solve the differential equations to get the charge distribution at any time t. Alternatively, one may use a kinetic Monte Carlo (KMC) algorithm with a series random walk trajectories. [5] In comparison, the KMC approach is numerically more efficient for large systems as converged results can be generally obtained with a sampling of acceptable number of trajectories.
+where :math:`P{_i}` is the occupation number of the charge to be on molecule i, and :math:`k{_{ij}}` is the charge transfer rate from molecule i to j. Namely, the population change on state i is the difference between the total population transfer from other states to state i and that from state i to other states. The PME can be solved directly through an iterative numerical scheme. One needs to set the initial populations on all states and solve the differential equations to get the charge distribution at any time t. Alternatively, one may use a kinetic Monte Carlo (KMC) algorithm with a series random walk trajectories. [5] In comparison, the KMC approach is numerically more efficient for large systems as converged results can be generally obtained with a sampling of acceptable number of trajectories.
 
 
 3. Monte Carlo Simulation
@@ -71,7 +71,7 @@ For a particle in a known fixed position at t = 0, the central limit theorem tel
 
 .. image:: ./img/f_t_4.png
 
-where t is the time elapsed since the start of the random walk, :math:`{\sigma}` is the size of a step of the random walk, and t is the time elapsed between two successive steps. This corresponds to the Green function of the diffusion equation that controls the Wiener process, which suggests that, after a large number of steps, the random walk converges toward a Wiener process (a stochastic process with similar behavior to Brownian motion, sometimes the Wiener process is called “Brownian motion”). In three dimensions, the variance corresponding to the Green's function of the diffusion equation is:
+where t is the time elapsed since the start of the random walk, :math:`\epsilon` is the size of a step of the random walk, and :math:`{\delta}`t is the time elapsed between two successive steps. This corresponds to the Green function of the diffusion equation that controls the Wiener process, which suggests that, after a large number of steps, the random walk converges toward a Wiener process (a stochastic process with similar behavior to Brownian motion, sometimes the Wiener process is called “Brownian motion”). In three dimensions, the variance corresponding to the Green's function of the diffusion equation is:
 
 .. image:: ./img/f_t_5.png
 
@@ -97,12 +97,12 @@ Rearrange the above equation, we have:
 
 .. image:: ./img/f_t_8.png
 
-Thus, the task is to first find the diffusion coefficient of a charge carrier, then the mobility of charge carrier is obtained by using the Einstein relationship. To fulfil the task, we can resort to Monte Carlo simulations. In detail, an arbitrary molecular site in the bulk system is initially chosen as the starting position for the charge. The charge then has a probability of pi to hop to the i-th neighbor (see Figure 2). In practice, in order to determine the next site of the charge in a statistical sense, a random number ξ uniformly distributed between 0 and 1 is generated. If :math:`\sum{^{b-1}_{i=1}}p_i < \sum{^{b}_{i=1}}p_i`, the charge hops to the b- i=1 i=1 th neighbor with a hopping time 1/kb, which assumes no correlation between the hopping events along different pathways. The simulation continues until the diffusion distance exceeds the lattice constant by at least 2–3 orders of magnitude. This process is repeated for thousands of times and averaged to get a linear relationship between the mean-square displacement (MSD) and the simulation time.
+Thus, the task is to first find the diffusion coefficient of a charge carrier, then the mobility of charge carrier is obtained by using the Einstein relationship. To fulfil the task, we can resort to Monte Carlo simulations. In detail, an arbitrary molecular site in the bulk system is initially chosen as the starting position for the charge. The charge then has a probability of pi to hop to the i-th neighbor (see Figure 2). In practice, in order to determine the next site of the charge in a statistical sense, a random number ξ uniformly distributed between 0 and 1 is generated. If :math:`\sum{^{b-1}_{i=1}}p_i < \sum{^{b}_{i=1}}p_i`, the charge hops to the b-th neighbor with a hopping time 1/:math:`k{_b}`, which assumes no correlation between the hopping events along different pathways. The simulation continues until the diffusion distance exceeds the lattice constant by at least 2–3 orders of magnitude. This process is repeated for thousands of times and averaged to get a linear relationship between the mean-square displacement (MSD) and the simulation time.
 
 .. image:: ./img/charge_hopping.png
 
 
-Schematic representation of the charge hopping pathways from molecule A to its neighbors with probabilities p1, p2, ..., and pN.
+Schematic representation of the charge hopping pathways from molecule A to its neighbors with probabilities :math:`p{_1}`, :math:`p{_2}`, ..., and :math:`p{_N}`.
 
 
 The diffusion coefficient D is calculated through
