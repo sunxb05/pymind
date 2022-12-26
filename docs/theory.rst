@@ -99,7 +99,8 @@ Thus, the task is to first find the diffusion coefficient of a charge carrier, t
 
 .. image:: ./img/charge_hopping.png
 
-         Schematic representation of the charge hopping pathways from molecule A to its neighbors with probabilities p1, p2, ..., and pN.
+
+Schematic representation of the charge hopping pathways from molecule A to its neighbors with probabilities p1, p2, ..., and pN.
 
 
 The diffusion coefficient D is calculated through
