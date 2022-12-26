@@ -154,9 +154,72 @@ Transport Calculation Files
 ===============================
 
 
-The full directory and file tree is shown in the following pages (in Linux case, as follows, by simply run the tree command):
+The first step of job manager momap.py is to run transport_prepare.exe. When the transport_prepare.exe is run, it will generate quite a few of directories and files.
+
+To demonstrate how the data and directories are arranged for MOMAP transport calculations, we set both control parameters HL_unique_mol and RE_unique_mol to 0 in the momap.inp.
+
+By running the transport_prepare.exe, the screen output is as follows:
+
+.. code-block:: bash
+
+
+	$ transport_prepare.exe
+	****** Perform Transport Preparation...
+	Reading config file "momap.inp"...
+	Reading crystal file "naphthalene.cif"...
+	  Identifier:
+	  Spacegroup name: 'P1'
+	  Spacegroup operations:
+	x,y,z
+	Cell lattice a = 8.098
+	Cell lattice b = 5.953
+	Cell lattice c = 8.652
+	Cell lattice alpha = 90
+	Cell lattice beta = 124.4
+	Cell lattice gamma = 90
+	natoms_cif = 36
+	First atom: C1 C 0.082321 0.018562 0.328357 ...
+	Last atom: H36 H 0.466698 0.795196 0.331298 Unit cell nmols = 2
+	Unit cell natoms = 18 18
+	Crystal file naphthalene.cif parsing done.
+	Make whole molecules...
+	molecule 1 COM = 0.000000 0.000000 -0.000000
+	molecule 2 COM = 0.500000 0.500000 1.000000 Writing config file "data/config.inp"...
+	**** MOMAP Build Neighbor List ****
+	  Neighbor rcutoff distance: 4
+	  Neighbor search cell (-/+): 3 3 3
+	**** End of MOMAP Build Neighbor List ****
+	****** MOMAP Transport Preparation Successfully Done.
+
+
+Then, all the necessary data and directories for MOMAP Transport calculations are prepared. The full directory and file tree is shown in the following pages (in Linux case, as follows, by simply run the tree command):
 
 .. image:: ./img/T1.png
 .. image:: ./img/T2.png
 .. image:: ./img/T3.png
 
+
+If control parameter sched_job_array=0 is set in momap.inp, more job scripts will be generated. However, do not be frightened by the sheer number of files, as they are all well-organized.
+
+In data directory, the uc_H.inp and uc_L.inp, input files for HOMO and LUMO determinations, are for internal use only, and may be used to check the correctness of the results. The mol1.mol and mol2.mol are the separated molecular files of a cif file, for example, also can be used to check the correctness of molecule separation.
+
+The file reorg_einternal_files.dat is used for reorganization internal energy calculations for molecules in the unit cell, which is used for the onsite energy calculation if the control parameter lat_site_energy (default to 0) is set to 1 in the momap.inp control file.
+
+The trans_int_files.dat is for transfer integral calculations. The other files have the meaning as the name suggests.
+
+Finally, the config.inp is the configuration file that the system actually uses. In the default settings, we use scheduling job array (sched_job_array = 1), do not include onsite energy (lat_site_energy = 0), output only base mobility plus angular resolved mobilities information (mob_output_level = 2).
+
+For example, if we do not want to output angular resolved mobilities, we can unset the 2nd bit (mob_output_level is a bit-wise setting flag), that is, mob_output_level = 0. The parameter data_mol_output_level is used to control the output of molecular information in data directory, default to 2. It is a bit-wise control parameter, the 1st bit corresponding to output for the 1st molecule, 2nd bit to output for all molecules, 3rd bit to output for the supercell cif file, and 4th bit to output for the Gaussian oniom input files. All the bit setting can be combined, for example, to output all information, we can set the parameter to 1+2+4+8 = 15, that is , data_mol_output_level = 15.
+
+The evc directory is a work directory for reorganization energy related calculations, which uses data from the RE directory to do the calculations.
+
+The HL directory is for transfer integral calculations. The naming convention is as follows:
+
+* The “uc_mol-” prefix is for single molecule in the central unit cell, thus the uc_mol-1.com and uc_mol-2.com are two Gaussian 
+  input files for the central unit cell.
+
+* The “nei_mol-” prefix is for single molecule in the neighbor unit cells, say, nei_mol-1- 6.com means the 6th neighbor molecule 
+  (the specific cell index is specified in the neighbor.dat file) of the 1st molecule in the central unit cell.
+
+* The “2mol-” prefix is for two-molecule-pair (dipole), say, 2mol-1-12.com, which means the 1st molecule in the central unit cell 
+  and the 12th neighbor molecule of this 1st molecule in central cell are combined to form the Gaussian input file.

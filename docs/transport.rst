@@ -251,3 +251,15 @@
 计算结果作图
 ============
 
+.. warning::
+
+   Specifying ``Type Raman`` alone does not trigger calculation of the Raman intensities. In order to calculate the Raman spectrum one should also specify ``Raman True``.
+
+.. note::
+
+   ``Displacements Symmetric`` will also produce a *3N*-by-*3N* Hessian matrix but if the Type key's argument is not ``All`` then this matrix will likely have many zero eigenvalues.
+
+
+
+
+.. math:: H_{ij} = \frac{\partial^2E}{\partial{}R_i\partial{}R_j}
