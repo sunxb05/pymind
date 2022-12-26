@@ -146,7 +146,7 @@ b. 激发态构型优化与频率计算
 
 .. seealso ::
 
-	 对以上MOMAP输入变量的解释，请参考API Reference部分.
+	 对以上MOMAP输入变量的解释，请参考API Reference_ 部分.
 
 
 
@@ -198,7 +198,7 @@ a. 辐射速率输入文件 momap.inp:
 
 .. seealso ::
 
-	 对以上MOMAP输入变量的解释，请参考API Reference部分.
+	 对以上MOMAP输入变量的解释，请参考API Reference_ 部分.
 
 
 把 momap.inp 文件、nodefile 文件和 4.1.2 部分计算得到的 evc.cart.dat 文件 放置于同一目录，运行以下命令进行计算:
@@ -559,7 +559,7 @@ a. 辐射速率输入文件 momap.inp:
 
 .. seealso ::
 
-	 对以上MOMAP输入变量的解释，请参考API Reference部分.
+	 对以上MOMAP输入变量的解释，请参考API Reference_ 部分.
 
 
 把 momap.inp 文件、nodefile 文件和 EVC 部分计算得到的 evc.cart.dat 文件放置于同一目录，运行以下命令进行计算:
@@ -928,5 +928,5 @@ b. 激发态构型优化与频率计算
 	``momap –input momap.inp –nodefile nodefile``
 
 
-
+.. _Reference: https://pyminds.readthedocs.io/en/latest/autoapi/index.html
 
