@@ -113,3 +113,38 @@ Hence, the vertical excitation energy at the optimized S1 geometry is 2.8300 eV,
 .. image:: ./img/functional_dipole_moment_emi.png
 
 The complete results can be found in directory tests/DSB/opt_and_frequency.
+
+
+
+
+
+Adiabatic energy difference between S0 and S1 states
+================================================================
+
+The adiabatic energy difference between S0 and S1 states can be calculated using single point energy results from above sections.
+
+In this example, the adiabatic energy difference is:
+
+.. code-block:: bash
+
+	(−849.06174378+849.17423899)*27.2114 eV=3.0122 eV
+
+
+
+
+Transition electric field and NACME at the optimized S1 geometry
+================================================================
+
+After finding the optimized S1 geometry, we can calculate transition electric field at this geometry. Then it’s possible to run a dushin calculation with NACME option toggled on.
+The route section is set as the following line:
+
+.. code-block:: bash
+
+	#p td b3lyp/6-31g(d) prop=(fitcharge,field) iop(6/22=-4, 6/29=1, 6/30=0, 6/17=2)
+
+
+When the calculation is completed, copy two output *.log files into a new directory. One is transition electric field *.log file, which is obtained in this section. The other is frequency calculation at the optimized S0 geometry *.log file, which is obtained in section 7.2. Then use get-nacme to start calculating NACME.
+The complete results can be found in directory tests/DSB/nacme.
+
+
+
