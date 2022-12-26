@@ -223,3 +223,80 @@ The HL directory is for transfer integral calculations. The naming convention is
 
 * The “2mol-” prefix is for two-molecule-pair (dipole), say, 2mol-1-12.com, which means the 1st molecule in the central unit cell 
   and the 12th neighbor molecule of this 1st molecule in central cell are combined to form the Gaussian input file.
+
+The jobs directory is used for QC (Gaussian) calculations in directories HL and RE, we use scheduling job array option as the default option to reduce the number of job scripts, which is controlled by the control parameter sched_job_array. These job scripts are called by the python scripts in scr directory.
+
+The RE directory is for reorganization calculations. The control files for evc.exe are also put in this directory. The normal mode calculations are done with these three directories, that is, evc, RE, and scr.
+
+The RUN directory is a directory where the running locks are put, users can check this directory for system progress. If an error occurs, ERROR flag will be set up in the RUN directory, which can be used to trace where the error occurs.
+
+The scr directory is a directory where the python scripts are put, these python scripts are called by the job manager momap.py. The sequential executions are logged into the momap.log, for example, if the output is redirected to momap.log.
+The logging information for transport_prepare.exe may looks like some things as follows:
+
+.. code-block:: bash
+
+	Do transport preparation ...
+	>> Run at directory: .
+	$> transport_prepare.exe
+	****** Perform Transport Preparation ... Reading config file "momap.inp" ... Reading crystal file "150h.cif" ...
+	Cell lattice a = 5.9575 Cell lattice b = 7.4678 Cell lattice c = 38.764 Cell lattice alpha = 90 Cell lattice beta = 90.067 Cell lattice gamma = 90 natoms_cif = 92
+	First atom: C1 C 0.09200 0.35760 0.02220 ...
+	Last atom: H92 H 0.15250 0.78170 0.41950 Unit cell nmols = 2
+	Unit cell natoms = 46 46
+	Crystal file 150h.cif parsing done. Writing config file "data/config.inp" ...
+	**** MOMAP Build Neighbor List ****
+	  Neighbor rcutoff distance: 7
+	  Neighbor search cell (-/+): 3 3 3
+	**** End of MOMAP Build Neighbor List ****
+	****** MOMAP Transport Preparation Successfully Done. --- Normal end for transport preparation.
+
+In the logging file, we can see where the job is run and what job is run.
+
+From the above logging information, we know the job is run at the current working directory . (dot)
+(note the line begins with >>), the job run is transport_prepare.exe (note the line begins with $>).
+
+Finally, if the command is run successfully, at the end of logging information for this program, there will appear a line, like, “--- Normal end for transport preparation”.
+
+However, to ensure the computing efficiency, in actual calculations, we normally set both control parameters HL_unique_mol and RE_unique_mol to 1, which is also the default setting.
+
+Note that users may tune the parameter bond_dis_scale (default to 1.15) when molecular separation with cif file is failed.
+
+Now, by running the transport_prepare.exe, the screen output is as follows:
+
+.. code-block:: bash
+
+	[test1]$ transport_prepare.exe
+	****** Perform Transport Preparation ... Reading config file "momap.inp" ... Reading molecular file "mol1.mol" ... Reading molecular file "mol2.mol" ... Writing config file "data/config.inp" ...
+	...
+	Crystal file naphthalene.cif parsing done.
+	Make whole molecules...
+	molecule 1 COM = 0.000000 0.000000 -0.000000
+	molecule 2 COM = 0.500000 0.500000 1.000000 Writing config file "data/config.inp"...
+	**** MOMAP Build Neighbor List ****
+	  Neighbor rcutoff distance: 4
+	  Neighbor search cell (-/+): 3 3 3
+	**** End of MOMAP Build Neighbor List ****
+	*** Check Duplicate 2mol pairs *** Unique 2mol pairs: 5 out of 28
+	1 1 <=> 1 1 5 <=> 5 1 7 <=> 7 1 11 <=> 11 1 13 <=> 13
+	*** End of Check Duplicate 2mol pairs ***
+	**** Check RE Duplicate Molecules in Unit Cell **** Unit cell molecule indexes: 1 1
+	Unit cell unique molecule indexes: 1
+	**** End of Check RE Duplicate Molecules in Unit Cell ****
+	**** Check HL Duplicate Molecules in Unit Cell **** Unit cell molecule indexes: 1 1
+	Unit cell unique molecule indexes: 1
+	**** End of Check HL Duplicate Molecules in Unit Cell **** ****** MOMAP Transport Preparation Successfully Done.
+
+Here, only the unique molecules and molecular pairs (dipoles) are selected for the transfer integral and reorganization energy calculations, which greatly reduces the computing time for QC job calculations. The full directory and file tree is shown as below:
+
+.. image:: ./img/T4.png
+.. image:: ./img/T5.png
+
+
+As we only calculate the unique molecules and molecular pairs (dipoles), we need to map these unique molecules and molecular pairs to the original molecules and molecular pairs, the mapping information is put in file unique_id_map.dat under data directory:
+
+.. image:: ./img/T6.png
+
+The first line is comment, the 2nd line is the number of molecules in the central unit cell, then follows number of neighbors for each central unit cell molecule and ID mapping data, which repeats the number of molecules in the central unit cell. For the three-column data in the above table, the first column is the central unit cell molecule ID, the second column is the neighbor ID for the corresponding central unit cell molecule, and the third column is the uniformly numbered IDs for the whole central unit cell.
+
+Thus, for example, a file 2mol-13.com has a uniform ID 13, which corresponds to central unit cell molecule ID 1 and neighbor molecule ID 13, as show in the above list. As another example, if we have a file 2mol-24.com, from the above list, we know it corresponds to the central unit cell molecule ID 2 and neighbor molecule ID 10.
+
