@@ -153,7 +153,7 @@
 
 
 
-计算过程及结果
+计算过程解释
 ============
 
 文件 momap.inp 按照迁移率计算的的原理定义了不同步骤。
@@ -173,12 +173,12 @@
 
 可以得到萘分子近邻文件: 
 
-neighbor01.xyz，
-neighbor02.xyz，
-NEIGHBOR.dat，
-SYS.dat，
-01/，
-02/
++ neighbor01.xyz，
++ neighbor02.xyz，
++ NEIGHBOR.dat，
++ SYS.dat，
++ 01/，
++ 02/
 
 
 其中 neighbor01.xyz，neighbor02.xyz 的文件分别是第一个和第二个分子的近邻信息。目录 01/，02/下存有 Gaussian 输入文件。NEIGHBOR.dat，SYS.dat 是所有 分子近邻信息的文件。
@@ -245,4 +245,9 @@ SYS.dat，
 
 计算得到的电子和空穴迁移率分别在目录 MC-quantu-temp(或者MC-marcus-temp)/下的 mob-e.dat 和 mob-h.dat 文件中。
 
+
+
+
+计算结果作图
+============
 
