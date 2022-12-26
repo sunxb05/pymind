@@ -292,8 +292,8 @@ c. 非辐射速率输入文件 momap.inp:
 
 .. code-block:: bash
 
-	do_ic_tvcf_ft   = 1                   #1 表示开启计算内转换关联函数
-	do_ic_tvcf_spec = 1	                #1 表示开启计算内转换光谱
+    do_ic_tvcf_ft   = 1                     #1 表示开启计算内转换关联函数
+    do_ic_tvcf_spec = 1                     #1 表示开启计算内转换光谱
 
 	&spec_tvcf                              #描述计算内容
 	  DUSHIN        True                    #是否考虑 Duschinsky 转动(t 开启，f 关闭)

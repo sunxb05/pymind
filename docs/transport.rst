@@ -82,9 +82,6 @@
 -----------
 
 
-本算例部分计算文件在 azulene/gaussian/目录下。Gaussian 使用方法详见 Gaussian 手册。
-以下为使用Gaussian进行基态构型优化与频率计算的输入文件的例子：
-
 .. code-block:: bash
 
 	&transport
@@ -186,7 +183,7 @@
 
 .. seealso ::
 
-	对生成的文件都详细解释，请参考附录 appendix_ 部分.
+	对生成的文件的详细解释，请参考附录 appendix_ 部分.
 
 
 2. 计算转移积分和重整能
@@ -200,28 +197,26 @@
     do_transport_submit_RE_job        = 1       # 计算重整能, 1表示开启，0表示关闭
 
 
+通过调用scr目录下的两个python脚本mol_one.py和mol_two.py来完成单分子单点能量计算和双分子单点能量计算。 这两个 python 脚本设置运行锁并提交传输积分计算的作业。
+当一个作业完成后，它会自动移除相应的锁。
 
-The work is done by calling two python scripts in scr directory, that is, mol_one.py and mol_two.py, to do the one-molecule single point energy calculations and two-molecule single point energy calculations. These two python scripts set up running locks and submit jobs for the transfer integral calculations.
-When a job is finished, it will remove the corresponding lock automatically.
 
 计算完成后会产生 Gaussian 计算得到的重整能和转移积分计算结果，文件存放在 目录 RE/下的 log 和 fchk 文件中。
 其中 VH01.dat，VH02.dat，VL01.dat，VL02.dat 文件，可以得到 01、02 分子和 4 个近邻间的 HUMO 和 LOMO 能级的转移积分。同时在 transferintegral/目录下得到不同分子与紧邻间的 HOMO 和 LUMO 能级的转移积 分:01/H.dat，01/L.dat，02/H.dat，02/L.dat。其中 01、02 表示第一、第二个分 子。H和L分别代表HOMO和LUMO能级。
 
 
-When the transfer integral calculations finish, all related locks on transfer integral calculations will be cleaned. The MOMAP manager will soon submit jobs for reorganization energy calculations. Comparing to the transfer integral calculations, this step takes more time to finish.
+当转移积分计算完成后，所有与转移积分计算相关的锁将被清除。 MOMAP 经理将很快提交重组能量计算的作业。 与传递积分计算相比，此步骤需要更多时间才能完成。
 
-Again, when a job is finished, it will remove the corresponding lock automatically.
+可以在此步骤中添加更多选项。 例如，如果想利用优化好不带电分子结构作为初始结构来优化相应阴离子阳离子几何结构，可以将参数 RE_use_neutral_chk 设置为 1，即 ``RE_use_neutral_chk = 1``。另外，如果想利用Nelson四点法计算重组能，可以将参数RE_calc_lambda_4P设置为1，即``RE_calc_lambda_4P = 1``，该方法可以用来检验evc计算中的重组能是否可靠。
 
-More options can be added in this step. For example, if one would like to optimize the anion and cation state geometries based on the optimized neutral state geometry, one can set the parameter RE_use_neutral_chk to 1, that is, RE_use_neutral_chk = 1. Also, if one would like to calculate the reorganization energies by using the Nelson four-point method, one can set the parameter RE_calc_lambda_4P to 1, that is RE_calc_lambda_4P = 1. This can be used to check if the reorganization energy in evc calculation is reliable.
 
-In this step, by calling the python script scr/get_transint.py, we obtain the transfer integral data, VH.dat and VL.dat, for the later transfer hopping rate calculations.
+通过调用python脚本scr/get_transint.py，我们得到了传输积分数据VH.dat和VL.dat，用于后面的传输跳跃率计算。
 
-The above calculations actually use information listed in files trans_int_files.dat under data directory. For example, the contents of trans_int_files.dat may look as follows:
+上述计算实际上使用了数据目录下的文件trans_int_files.dat 中列出的信息。 例如，trans_int_files.dat 的内容可能如下所示:
 
 .. image:: ./img/trans_int_files.png
 
-The first line contains the number of molecules in unit cell. Then follows a number of neighbors for that each molecule in the central unit cell, plus the three-file-group listing and the two molecular IDs. These files are used by the MOMAP command transport_transferintegral.exe.
-
+第一行包含晶胞中的分子数，然后是中心单元中每个分子的邻居数目，加上三文件组列表和两个分子的ID。 这些文件由 MOMAP可执行文件 transport_transferintegral.exe 使用。
 
 
 3. 分析重整能
@@ -233,11 +228,12 @@ The first line contains the number of molecules in unit cell. Then follows a num
 	do_transport_get_re_evc           = 1       # 使用 evc 程序分析重整能, 1表示开启，0表示关闭
 
 
+在这一步中，我们将计算分为三步：prepare_RE.py、run_RE.py和get_RE.py。首先是准备输入文件，接着调用evc.exe进行实际计算，第三部分是收集计算结果.
+
 在目录 evc/目录下文件 lamda.dat 存有电子和空穴重整能。其中 lam1 是指电 中性的分子处在平衡结构上和在带点结构上的能量之差。lam2 是指带电的离子 处在平衡结构和在电中性的分子上的能量之差。
 
 目录 evc/elec/下的 NM.dat 文件包含不同振动频率下的重整能和黄昆因子
 
-In this step, we further split the calculation into three parts: prepare_RE.py, run_RE.py, and get_RE.py. The first part is to prepare input files for the evc.exe program to do normal mode calculations, the second part is using the scheduling system to do the actual calculations, while the third part is to collect the calculated results and put the results into places.
 
 
 
@@ -254,14 +250,13 @@ In this step, we further split the calculation into three parts: prepare_RE.py, 
 
 计算后得到不同近邻间 HOMO、LUMO 能级迁移速率，分别在文件 WH01.dat， WH02.dat，WL01.dat，WL02.dat 中。
 
-Once the above preparation work is done, we can do MC simulations to calculate the charge carrier mobilities.
+完成上述准备工作后，我们就可以进行 MC 模拟来计算电荷载流子迁移率。
 
-This step is also split into two parts, that is, prepare-mc.py and run_mc_batch.py. The first part is to copy the obtained related input files (e.g., VH.dat, VL.dat, NM-e.dat NM-h.dat) into the MC working directory, and do the hopping rate calculations. The second part is to submit jobs to the scheduling (batching) system to do the MC simulations. As the MC program runs, the track files are written out into tracks directory. Normally, 2000 tracks will generate fairly good mobility results.
+这一步也分为两部分，即prepare-mc.py和run_mc_batch.py。 第一部分是将得到的相关输入文件（如VH.dat、VL.dat、NM-e.dat NM-h.dat）复制到MC工作目录中，计算hopping rate。 第二部分是 MC 模拟。 当 MC 程序运行时，生成的记录行走轨迹的文件被写到相应目录中。 通常，2000 条随机行走轨迹将给出合理的迁移率的结果。
 
+在此步骤中，我们通常利用 OpenMP 做高速并行计算，它几乎与节点中的核数成线性比例关系。 例如，如果正在运行的节点有 28 个核，则运行速度是相应串行作业的 28 倍。
 
-In this step, we normally take advantage of the OpenMP parallelization capability, it linearly scales with the number of cores in a node. For example, if the running node has 28 cores, the performance gain is 28 times comparing to the same serial job.
-
-Once the MC simulations finish, we can calculate the random walk mobilities from the MC track files by using the Einstein relationship.
+一旦 MC 模拟完成，我们就可以使用爱因斯坦关系从 MC 轨迹文件中计算随机游走迁移率。
 
 
 5. 不同温度下随机行走模拟
@@ -282,22 +277,17 @@ Once the MC simulations finish, we can calculate the random walk mobilities from
 6. 数据收集
 -----------
 
-As all the calculations finish, the results are gathered to the file momap.dat as follows.
+
+当所有计算完成后，结果将收集到文件 momap.dat 中，如下所示。
 
 
 .. image:: ./img/gather_data.png
-
-Finally, the job is done!
-
-
-
 
 
 计算结果作图
 ============
 
-In the MC calculation directories, once the ps2png is properly installed, we can use the following commands to generate and display the 3D and 2D mobility plots:
-
+如果正确安装 ps2png 程序，我们可以使用以下命令生成和显示相应的 3D 和 2D 的结果图：
 
 .. code-block:: bash
 
@@ -306,8 +296,7 @@ In the MC calculation directories, once the ps2png is properly installed, we can
 	$> display *.png
 
 
-If the installed gnuplot supports term pngcairo, we can simply run:
-
+如果安装的 gnuplot 支持 pngcairo，我们可以简单地运行：
 
 .. code-block:: bash
 
@@ -320,7 +309,7 @@ If the installed gnuplot supports term pngcairo, we can simply run:
 .. image:: ./img/plot_2.png
 
 
-In addition, if numpy and matplotlib packages are installed with python, we can also use the generated python scripts to display the mobility plots. The corresponding python scripts in running MC directories are: mob_direction_all.py, mob_plane_xy.py, mob_plane_xz.py and mob_plane_yz.py. For example, the 3D and 2D plots for the electron case are shown as follows:
+此外，如果 numpy 和 matplotlib 安装，我们还可以使用生成的 python 脚本来显示电子迁移结果。 运行MC目录对应的python脚本为：mob_direction_all.py、mob_plane_xy.py、mob_plane_xz.py和mob_plane_yz.py。 例如，电子迁移的 3D 和 2D 图如下所示:
 
 
 
