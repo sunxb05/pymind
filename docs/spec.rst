@@ -324,6 +324,7 @@ d. 计算结果解读:
 ======
 本部分以 Ir(ppy)3 为例，计算文件在 Irppy3/目录下。
 
+.. image:: ./img/Irppy3.png
 
 1. 量化计算
 -----------
@@ -593,15 +594,16 @@ b. 计算结果解读:
 
 1) 计算完成后先确认关联函数是否收敛，将 spec.tvcf.ft.dat 的前两列画图，若随着积分时间的增加，纵坐标的值基本为 0 且呈直线，则表示关联函数已经收敛。
 
-
+.. image:: ./img/spec_tvcf_ft_dat_2.png
 
 2) 确认关联函数收敛后，根据光谱文件 spec.tvcf.spec.dat，选取所需数据画出 相关的吸收光谱和发射光谱:
 
+.. image:: ./img/spec_tvcf_spec_dat_2.png
 
 3) 辐射速率 kr 可在 spec.tvcf.log 文件末端读取。如下图所示，第一个数值和第 二个数值都表示辐射速率，单位分别是 au 和 s-1，第三个数值表示寿命。计算得 到 azulene 分子的辐射速率 kr 为 2.72281554×105s-1。
 
 
-
+.. image:: ./img/spec_tvcf_log_2.png
 
 
 4. 非辐射速率
@@ -675,6 +677,8 @@ Herzberg-Teller 效应
 
 本部分以 porphine 为例，计算文件在 porphine/目录下。
 一般当计算体系为弱发光体系或者柔性分子时，在计算过程中加入 HT 效应 会比较显著，是否考虑 Herzberg-Teller 效应需要根据用户理论知识和计算过程自 行决定，具体方法如下文所述。
+
+.. image:: ./img/porphine.png
 
 
 1. 量化计算
