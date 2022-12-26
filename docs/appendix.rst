@@ -1,5 +1,5 @@
-Obtain Information from QC packages
-************************************
+附录
+****
 
 
 In the following part of this guide, we will show you how to obtain the useful calculation results from various QC packages. The 1,4-distyrylbenzene molecule (DSB for short) and Gaussian 09 package are used to demonstrate the process.
