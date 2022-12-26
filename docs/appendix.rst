@@ -45,8 +45,8 @@ When the calculation is completed, find the related information about “Excited
 .. code-block:: bash
 
 	Ground to excited state transition electric dipole moments (Au):
-	state 		X 			Y 			Z 			Dip. S. 		Osc.
-	   1 	 -4.6693 	 -0.0118 	  0.0112 		21.8029 		1.7826
+	state      X        Y       Z      Dip. S.     Osc.
+	   1    -4.6693  -0.0118  0.0112   21.8029    1.7826
 
 	Excited State 1: Singlet-A 3.3372 eV 371.52 nm f=1.7826 <S**2>=0.000 75 -> 76 0.70728 
 	This state for optimization and/or second-order correction.
@@ -54,6 +54,7 @@ When the calculation is completed, find the related information about “Excited
 
 
 Hence, the vertical excitation energy at the optimized S0 geometry is 3.3372 eV, and the transition dipole moment (absorption) can be obtained using Dip. S.:
+
 
 .. image:: ./img/functional1_dipole_moment.png
 
