@@ -61,6 +61,15 @@ a. 基态构型优化与频率计算
 运行结束后生成文件 azulene-s0.fchk，azulene-s0.flog 和 azulene-s0.fchk 这两个文件将用于后续的振动分析计算。
 
 
+.. seealso ::
+
+	获取Gaussian输出文件中的查找相应数据，请参考附录 appendix_ 部分.
+
+
+.. important ::
+
+   	文件结尾注意空两行，表示高斯文件结束。
+
 
 
 b. 激发态构型优化与频率计算
@@ -99,12 +108,6 @@ b. 激发态构型优化与频率计算
 	 H                 -3.04994500    2.25593900    0.00000000
 	 C                 -2.21340000    0.20656500    0.00000000
 	 H                 -3.10314400   -0.41207700    0.00000000
-
-
-
-.. important ::
-
-   	文件结尾注意空两行，表示高斯文件结束。
 
 
 
@@ -930,3 +933,4 @@ b. 激发态构型优化与频率计算
 
 .. _Reference: https://pyminds.readthedocs.io/en/latest/autoapi/index.html
 
+.. _appendix: https://pyminds.readthedocs.io/en/latest/appendix.html
