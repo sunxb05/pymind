@@ -11,7 +11,7 @@
 下图为 azulene 的结构示意图，由五元环和七 元环组成，其分子式为 C10H8。
 
 
-.. image:: ./img/azulene .png
+.. image:: ./img/azulene.png
 
 
 1. 量化计算
