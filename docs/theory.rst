@@ -27,11 +27,11 @@ In order to perform the calculation, including geometries, single point energy a
 1. Charge Transfer Rate
 -----------------------
 
-Due to the weak coupling between molecules, the charge transport in most organics is dominated by the hopping mechanism, which implies that the transport dynamics can be decomposed into elementary charge transfer processes between different pairs of molecules. The charge transfer between two molecules, :math:`M{_i}` and :math:`M{_j}`, is a charge exchange reaction. The initial and final states are :math:`{^*_i}M{_j}` and :math:`M{_i}M{^*_j}`, where :math:{^*_i} denotes the charge on molecule M. The widely used charge transfer rate from the classical Marcus theory reads
+Due to the weak coupling between molecules, the charge transport in most organics is dominated by the hopping mechanism, which implies that the transport dynamics can be decomposed into elementary charge transfer processes between different pairs of molecules. The charge transfer between two molecules, :math:`M{_i}` and :math:`M{_j}`, is a charge exchange reaction. The initial and final states are :math:`M{^*_i}M{_j}` and :math:`M{_i}M{^*_j}`, where :math:`M{^*_i}` denotes the charge on molecule M. The widely used charge transfer rate from the classical Marcus theory reads
 
 .. image:: ./img/f_t_1.png
 
-Here, :math:`V{_ij}` is the transfer integral between the initial and final states, λ is the reorganization energy which is defined as the energy change associated with the geometry relaxation during the charge transfer, and :math:`\delta G{_ij^0}` is relevant change of total Gibbs free energy. In molecular semiconductors with only one kind of ij molecules, :math:`\delta G{_ij^0}` equals to zero, and then the Marcus rate becomes
+Here, :math:`V{_{ij}` is the transfer integral between the initial and final states, λ is the reorganization energy which is defined as the energy change associated with the geometry relaxation during the charge transfer, and :math:`\Delta{G_{ij}^0}` is relevant change of total Gibbs free energy. In molecular semiconductors with only one kind of ij molecules, :math:`\Delta{G_{ij}^0}` equals to zero, and then the Marcus rate become
 
 .. image:: ./img/f_t_2.png
 
@@ -48,7 +48,7 @@ When the charge transfer rates are defined, the charge transport dynamics can be
 
 .. image:: ./img/f_t_3.png
 
-where Pi is the occupation number of the charge to be on molecule i, and :math:`k{_ij}` is the charge transfer rate from molecule :math:`{_i}` to :math:`{_j}`. Namely, the population change on state :math:`{_i}` is the difference between the total population transfer from other states to state i and that from state i to other states. The PME can be solved directly through an iterative numerical scheme. One needs to set the initial populations on all states and solve the differential equations to get the charge distribution at any time t. Alternatively, one may use a kinetic Monte Carlo (KMC) algorithm with a series random walk trajectories. [5] In comparison, the KMC approach is numerically more efficient for large systems as converged results can be generally obtained with a sampling of acceptable number of trajectories.
+where Pi is the occupation number of the charge to be on molecule i, and :math:`k{_{ij}` is the charge transfer rate from molecule :math:`{_i}` to :math:`{_j}`. Namely, the population change on state :math:`{_i}` is the difference between the total population transfer from other states to state i and that from state i to other states. The PME can be solved directly through an iterative numerical scheme. One needs to set the initial populations on all states and solve the differential equations to get the charge distribution at any time t. Alternatively, one may use a kinetic Monte Carlo (KMC) algorithm with a series random walk trajectories. [5] In comparison, the KMC approach is numerically more efficient for large systems as converged results can be generally obtained with a sampling of acceptable number of trajectories.
 
 
 3. Monte Carlo Simulation
