@@ -35,6 +35,10 @@ Here, Vij is the transfer integral between the initial and final states, λ is t
 
 .. image:: ./img/f_t_2.png
 
+
+.. math:: H_{ij} = \frac{\partial^2E}{\partial{}R_i\partial{}R_j}
+
+
 Thereby, the charge transfer is actually a thermal activation process over a barrier of λ/4. The Marcus rate is most appropriate when (1) the temperature is high, (2) the molecules are in equilibrium in both the initial and final states, and (3) the intermolecular diabatic couplings are weak. [3]
 
 

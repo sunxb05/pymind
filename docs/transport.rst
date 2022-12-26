@@ -149,7 +149,7 @@
 
 .. seealso ::
 
-	 对以上MOMAP输入变量的解释，请参考API Reference部分.
+	 对以上MOMAP输入变量的解释，请参考附录 appendix_ 部分.
 
 
 
@@ -173,16 +173,20 @@
 
 可以得到萘分子近邻文件: 
 
-+ neighbor01.xyz，
-+ neighbor02.xyz，
-+ NEIGHBOR.dat，
-+ SYS.dat，
-+ 01/，
-+ 02/
+* neighbor01.xyz，
+* neighbor02.xyz，
+* NEIGHBOR.dat，
+* SYS.dat，
+* 01/，
+* 02/
 
 
-其中 neighbor01.xyz，neighbor02.xyz 的文件分别是第一个和第二个分子的近邻信息。目录 01/，02/下存有 Gaussian 输入文件。NEIGHBOR.dat，SYS.dat 是所有 分子近邻信息的文件。
+其中 neighbor01.xyz，neighbor02.xyz 的文件分别是第一个和第二个分子的近邻信息。目录 01/，02/下存有 Gaussian 输入文件。NEIGHBOR.dat，SYS.dat 是所有分子近邻信息的文件。
 
+
+.. seealso ::
+
+	对生成的文件都详细解释，请参考附录 appendix_ 部分.
 
 
 2. 计算转移积分和重整能
@@ -197,9 +201,26 @@
 
 
 
+The work is done by calling two python scripts in scr directory, that is, mol_one.py and mol_two.py, to do the one-molecule single point energy calculations and two-molecule single point energy calculations. These two python scripts set up running locks and submit jobs for the transfer integral calculations.
+When a job is finished, it will remove the corresponding lock automatically.
+
 计算完成后会产生 Gaussian 计算得到的重整能和转移积分计算结果，文件存放在 目录 RE/下的 log 和 fchk 文件中。
 其中 VH01.dat，VH02.dat，VL01.dat，VL02.dat 文件，可以得到 01、02 分子和 4 个近邻间的 HUMO 和 LOMO 能级的转移积分。同时在 transferintegral/目录下得到不同分子与紧邻间的 HOMO 和 LUMO 能级的转移积 分:01/H.dat，01/L.dat，02/H.dat，02/L.dat。其中 01、02 表示第一、第二个分 子。H和L分别代表HOMO和LUMO能级。
 
+
+When the transfer integral calculations finish, all related locks on transfer integral calculations will be cleaned. The MOMAP manager will soon submit jobs for reorganization energy calculations. Comparing to the transfer integral calculations, this step takes more time to finish.
+
+Again, when a job is finished, it will remove the corresponding lock automatically.
+
+More options can be added in this step. For example, if one would like to optimize the anion and cation state geometries based on the optimized neutral state geometry, one can set the parameter RE_use_neutral_chk to 1, that is, RE_use_neutral_chk = 1. Also, if one would like to calculate the reorganization energies by using the Nelson four-point method, one can set the parameter RE_calc_lambda_4P to 1, that is RE_calc_lambda_4P = 1. This can be used to check if the reorganization energy in evc calculation is reliable.
+
+In this step, by calling the python script scr/get_transint.py, we obtain the transfer integral data, VH.dat and VL.dat, for the later transfer hopping rate calculations.
+
+The above calculations actually use information listed in files trans_int_files.dat under data directory. For example, the contents of trans_int_files.dat may look as follows:
+
+.. image:: ./img/trans_int_files.png
+
+The first line contains the number of molecules in unit cell. Then follows a number of neighbors for that each molecule in the central unit cell, plus the three-file-group listing and the two molecular IDs. These files are used by the MOMAP command transport_transferintegral.exe.
 
 
 
@@ -216,6 +237,9 @@
 
 目录 evc/elec/下的 NM.dat 文件包含不同振动频率下的重整能和黄昆因子
 
+In this step, we further split the calculation into three parts: prepare_RE.py, run_RE.py, and get_RE.py. The first part is to prepare input files for the evc.exe program to do normal mode calculations, the second part is using the scheduling system to do the actual calculations, while the third part is to collect the calculated results and put the results into places.
+
+
 
 4. 随机行走模拟
 --------------------
@@ -230,6 +254,14 @@
 
 计算后得到不同近邻间 HOMO、LUMO 能级迁移速率，分别在文件 WH01.dat， WH02.dat，WL01.dat，WL02.dat 中。
 
+Once the above preparation work is done, we can do MC simulations to calculate the charge carrier mobilities.
+
+This step is also split into two parts, that is, prepare-mc.py and run_mc_batch.py. The first part is to copy the obtained related input files (e.g., VH.dat, VL.dat, NM-e.dat NM-h.dat) into the MC working directory, and do the hopping rate calculations. The second part is to submit jobs to the scheduling (batching) system to do the MC simulations. As the MC program runs, the track files are written out into tracks directory. Normally, 2000 tracks will generate fairly good mobility results.
+
+
+In this step, we normally take advantage of the OpenMP parallelization capability, it linearly scales with the number of cores in a node. For example, if the running node has 28 cores, the performance gain is 28 times comparing to the same serial job.
+
+Once the MC simulations finish, we can calculate the random walk mobilities from the MC track files by using the Einstein relationship.
 
 
 5. 不同温度下随机行走模拟
@@ -247,19 +279,55 @@
 
 
 
+6. 数据收集
+-----------
+
+As all the calculations finish, the results are gathered to the file momap.dat as follows.
+
+
+.. image:: ./img/gather_data.png
+
+Finally, the job is done!
+
+
+
+
 
 计算结果作图
 ============
 
-.. warning::
-
-   Specifying ``Type Raman`` alone does not trigger calculation of the Raman intensities. In order to calculate the Raman spectrum one should also specify ``Raman True``.
-
-.. note::
-
-   ``Displacements Symmetric`` will also produce a *3N*-by-*3N* Hessian matrix but if the Type key's argument is not ``All`` then this matrix will likely have many zero eigenvalues.
+In the MC calculation directories, once the ps2png is properly installed, we can use the following commands to generate and display the 3D and 2D mobility plots:
 
 
+.. code-block:: bash
+
+	$> gnuplot *.gnu
+	$> ps2png *.eps
+	$> display *.png
 
 
-.. math:: H_{ij} = \frac{\partial^2E}{\partial{}R_i\partial{}R_j}
+If the installed gnuplot supports term pngcairo, we can simply run:
+
+
+.. code-block:: bash
+
+	$> gnuplot *.gnu-png
+	$> display *.png
+
+
+
+.. image:: ./img/plot_1.png
+.. image:: ./img/plot_2.png
+
+
+In addition, if numpy and matplotlib packages are installed with python, we can also use the generated python scripts to display the mobility plots. The corresponding python scripts in running MC directories are: mob_direction_all.py, mob_plane_xy.py, mob_plane_xz.py and mob_plane_yz.py. For example, the 3D and 2D plots for the electron case are shown as follows:
+
+
+
+.. image:: ./img/plot_3.png
+.. image:: ./img/plot_4.png
+
+
+
+
+.. _appendix: https://pyminds.readthedocs.io/en/latest/appendix.html
