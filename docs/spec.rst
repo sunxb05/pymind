@@ -2,12 +2,16 @@
 发光部分
 *******
 
-“发光部分”分别以荧光和磷光的计算为例，详细介绍了分子的量化计算、 EVC(Electron-Vibration Coupling)振动分析、吸收光谱、辐射光谱、辐射速率、内转换速率、系间窜越速率的计算过程。另外，本文还详细介绍了态求和方法和 Herzberg-Teller 效应的计算过程。
+“发光部分”分别以荧光和磷光的计算为例，详细介绍了分子的量化计算、 EVC(Electron-Vibration Coupling)振动分析、吸收光谱、辐射光谱、辐射速率、内转换速率、系间窜越速率的计算过程。另外，本文还详细介绍了态求和方法和 Herzberg-Teller效应的计算过程。
  
 
 荧光
 ======
 吸收光谱、荧光光谱以及辐射速率的计算流程以 azulene 为例，算例数据位于 momap/example/azulene/目录下。
+下图为 azulene 的结构示意图，由五元环和七 元环组成，其分子式为 C10H8。
+
+
+.. image:: ./img/azulene .png
 
 
 1. 量化计算
@@ -226,13 +230,15 @@ b. 计算结果解读:
 
 1) 计算完成后先确认关联函数是否收敛，将 spec.tvcf.ft.dat 的前两列画图，若随着积分时间的增加，纵坐标的值基本为 0 且呈直线，则表示关联函数已经收敛。
 
-
+.. image:: ./img/spec_tvcf_ft_dat.png
 
 2) 确认关联函数收敛后，根据光谱文件 spec.tvcf.spec.dat，选取所需数据画出 相关的吸收光谱和发射光谱:
 
+.. image:: ./img/spec_tvcf_spec_dat.png
 
 3) 辐射速率 kr 可在 spec.tvcf.log 文件末端读取。如下图所示，第一个数值和第 二个数值都表示辐射速率，单位分别是 au 和 s-1，第三个数值表示寿命。计算得 到 azulene 分子的辐射速率 kr 为 2.72281554×105s-1。
 
+.. image:: ./img/spec_tvcf_log.png
 
 
 
