@@ -71,7 +71,7 @@ For a particle in a known fixed position at t = 0, the central limit theorem tel
 
 .. image:: ./img/f_t_4.png
 
-where t is the time elapsed since the start of the random walk, :math:`\epsilon` is the size of a step of the random walk, :math:`\delta`t is the time elapsed between two successive steps. This corresponds to the Green function of the diffusion equation that controls the Wiener process, which suggests that, after a large number of steps, the random walk converges toward a Wiener process (a stochastic process with similar behavior to Brownian motion, sometimes the Wiener process is called “Brownian motion”). In three dimensions, the variance corresponding to the Green's function of the diffusion equation is:
+where t is the time elapsed since the start of the random walk, :math:`\epsilon` is the size of a step of the random walk, :math:`\delta{_t}`is the time elapsed between two successive steps. This corresponds to the Green function of the diffusion equation that controls the Wiener process, which suggests that, after a large number of steps, the random walk converges toward a Wiener process (a stochastic process with similar behavior to Brownian motion, sometimes the Wiener process is called “Brownian motion”). In three dimensions, the variance corresponding to the Green's function of the diffusion equation is:
 
 .. image:: ./img/f_t_5.png
 
