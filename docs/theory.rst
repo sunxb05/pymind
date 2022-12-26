@@ -31,7 +31,7 @@ Due to the weak coupling between molecules, the charge transport in most organic
 
 .. image:: ./img/f_t_1.png
 
-Here, :math:`V{_{ij}` is the transfer integral between the initial and final states, λ is the reorganization energy which is defined as the energy change associated with the geometry relaxation during the charge transfer, and :math:`\Delta{G_{ij}^0}` is relevant change of total Gibbs free energy. In molecular semiconductors with only one kind of ij molecules, :math:`\Delta{G_{ij}^0}` equals to zero, and then the Marcus rate become
+Here, :math:`V{_{ij}}` is the transfer integral between the initial and final states, λ is the reorganization energy which is defined as the energy change associated with the geometry relaxation during the charge transfer, and :math:`\Delta{G_{ij}^0}` is relevant change of total Gibbs free energy. In molecular semiconductors with only one kind of ij molecules, :math:`\Delta{G_{ij}^0}` equals to zero, and then the Marcus rate become
 
 .. image:: ./img/f_t_2.png
 
