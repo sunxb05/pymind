@@ -31,24 +31,24 @@ Due to the weak coupling between molecules, the charge transport in most organic
 
 .. image:: ./img/f_t_1.png
 
-Here, :math:`V{_{ij}}` is the transfer integral between the initial and final states, λ is the reorganization energy which is defined as the energy change associated with the geometry relaxation during the charge transfer, and :math:`\Delta{G_{ij}^0}` is relevant change of total Gibbs free energy. In molecular semiconductors with only one kind of ij molecules, :math:`\Delta{G_{ij}^0}` equals to zero, and then the Marcus rate become
+Here, :math:`V{_{ij}}` is the transfer integral between the initial and final states, λ is the reorganization energy which is defined as the energy change associated with the geometry relaxation during the charge transfer, and :math:`\Delta{G_{ij}^0}` is relevant change of total Gibbs free energy. In molecular semiconductors with only one kind of molecules, :math:`\Delta{G_{ij}^0}` equals to zero, and then the Marcus rate become
 
 .. image:: ./img/f_t_2.png
 
 
 
-Thereby, the charge transfer is actually a thermal activation process over a barrier of λ/4. The Marcus rate is most appropriate when (1) the temperature is high, (2) the molecules are in equilibrium in both the initial and final states, and (3) the intermolecular diabatic couplings are weak. [3]
+Thereby, the charge transfer is actually a thermal activation process over a barrier of λ/4. The Marcus rate is most appropriate when (1) the temperature is high, (2) the molecules are in equilibrium in both the initial and final states, and (3) the intermolecular diabatic couplings are weak. 
 
 
 2. Pauli Master Equation
 --------------------------
 
 
-When the charge transfer rates are defined, the charge transport dynamics can be characterized by the Pauli master equation (PME) with a Markov assumption. [4] It describes the time evolution of the electron population on each state with a set of purely classical kinetic equations,
+When the charge transfer rates are defined, the charge transport dynamics can be characterized by the Pauli master equation (PME) with a Markov assumption. It describes the time evolution of the electron population on each state with a set of purely classical kinetic equations,
 
 .. image:: ./img/f_t_3.png
 
-where :math:`P{_i}` is the occupation number of the charge to be on molecule i, and :math:`k{_{ij}}` is the charge transfer rate from molecule i to j. Namely, the population change on state i is the difference between the total population transfer from other states to state i and that from state i to other states. The PME can be solved directly through an iterative numerical scheme. One needs to set the initial populations on all states and solve the differential equations to get the charge distribution at any time t. Alternatively, one may use a kinetic Monte Carlo (KMC) algorithm with a series random walk trajectories. [5] In comparison, the KMC approach is numerically more efficient for large systems as converged results can be generally obtained with a sampling of acceptable number of trajectories.
+where :math:`P{_i}` is the occupation number of the charge to be on molecule i, and :math:`k{_{ij}}` is the charge transfer rate from molecule i to j. Namely, the population change on state i is the difference between the total population transfer from other states to state i and that from state i to other states. The PME can be solved directly through an iterative numerical scheme. One needs to set the initial populations on all states and solve the differential equations to get the charge distribution at any time t. Alternatively, one may use a kinetic Monte Carlo (KMC) algorithm with a series random walk trajectories. In comparison, the KMC approach is numerically more efficient for large systems as converged results can be generally obtained with a sampling of acceptable number of trajectories.
 
 
 3. Monte Carlo Simulation
@@ -97,7 +97,7 @@ Rearrange the above equation, we have:
 
 .. image:: ./img/f_t_8.png
 
-Thus, the task is to first find the diffusion coefficient of a charge carrier, then the mobility of charge carrier is obtained by using the Einstein relationship. To fulfil the task, we can resort to Monte Carlo simulations. In detail, an arbitrary molecular site in the bulk system is initially chosen as the starting position for the charge. The charge then has a probability of pi to hop to the i-th neighbor (see Figure 2). In practice, in order to determine the next site of the charge in a statistical sense, a random number ξ uniformly distributed between 0 and 1 is generated. If :math:`\sum{^{b-1}_{i=1}}p_i < \sum{^{b}_{i=1}}p_i`, the charge hops to the b-th neighbor with a hopping time 1/:math:`k{_b}`, which assumes no correlation between the hopping events along different pathways. The simulation continues until the diffusion distance exceeds the lattice constant by at least 2–3 orders of magnitude. This process is repeated for thousands of times and averaged to get a linear relationship between the mean-square displacement (MSD) and the simulation time.
+Thus, the task is to first find the diffusion coefficient of a charge carrier, then the mobility of charge carrier is obtained by using the Einstein relationship. To fulfil the task, we can resort to Monte Carlo simulations. In detail, an arbitrary molecular site in the bulk system is initially chosen as the starting position for the charge. The charge then has a probability of pi to hop to the i-th neighbor (see Figure below). In practice, in order to determine the next site of the charge in a statistical sense, a random number ξ uniformly distributed between 0 and 1 is generated. If :math:`\sum{^{b-1}_{i=1}}p_i < \sum{^{b}_{i=1}}p_i`, the charge hops to the b-th neighbor with a hopping time 1/:math:`k{_b}`, which assumes no correlation between the hopping events along different pathways. The simulation continues until the diffusion distance exceeds the lattice constant by at least 2–3 orders of magnitude. This process is repeated for thousands of times and averaged to get a linear relationship between the mean-square displacement (MSD) and the simulation time.
 
 .. image:: ./img/charge_hopping.png
 
