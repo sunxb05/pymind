@@ -146,8 +146,7 @@
 
 .. seealso ::
 
-	 对以上MOMAP输入变量的解释，请参考附录 appendix_ 部分.
-
+	 对以上MOMAP输入变量的解释，请参考API Reference_ 部分.
 
 
 计算过程解释
@@ -201,13 +200,17 @@
 当一个作业完成后，它会自动移除相应的锁。
 
 
-计算完成后会产生 Gaussian 计算得到的重整能和转移积分计算结果，文件存放在 目录 RE/下的 log 和 fchk 文件中。其中 VH01.dat，VH02.dat，VL01.dat，VL02.dat 文件，可以得到 01、02 分子和 4 个近邻间的 HUMO 和 LOMO 能级的转移积分。同时在 transferintegral/目录下得到不同分子与紧邻间的 HOMO 和 LUMO 能级的转移积 分:01/H.dat，01/L.dat，02/H.dat，02/L.dat。其中 01、02 表示第一、第二个分 子。H和L分别代表HOMO和LUMO能级。
+计算完成后会产生 Gaussian 计算得到的重整能和转移积分计算结果，文件存放在 目录 RE/下的 log 和 fchk 文件中。其中 VH01.dat，VH02.dat，VL01.dat，VL02.dat 文件，可以得到 01、02 分子和 4 个近邻间的 HUMO 和 LOMO 能级的转移积分。同时在 transferintegral/目录下得到不同分子与紧邻间的 HOMO 和 LUMO 能级的转移积 分:01/H.dat，01/L.dat，02/H.dat，02/L.dat。其中 01、02 表示第一、第二个分子。H和L分别代表HOMO和LUMO能级。
 
 
 当转移积分计算完成后，所有与转移积分计算相关的锁将被清除。 MOMAP将很快提交重组能量计算的作业。 与计算转移积分计算相比，此步骤需要更多时间才能完成。
 
 
-可以在此步骤中添加更多选项。 例如，如果想利用优化好不带电分子结构作为初始结构来优化相应阴离子阳离子几何结构，可以将参数 RE_use_neutral_chk 设置为 1，即 ``RE_use_neutral_chk = 1``。另外，如果想利用Nelson四点法计算重组能，可以将参数RE_calc_lambda_4P设置为1，即 ``RE_calc_lambda_4P = 1`` ，该方法可以用来检验evc计算中的重组能是否可靠。
+.. note ::
+
+	可以在此步骤中添加更多选项。例如，如果想利用优化好不带电分子结构作为初始结构来优化相应阴离子阳离子几何结构，可以将参数 RE_use_neutral_chk 设置为 1，即 ``RE_use_neutral_chk = 1``。
+	另外，如果想利用Nelson四点法计算重组能，可以将参数RE_calc_lambda_4P设置为1，即 
+	``RE_calc_lambda_4P = 1`` ，该方法可以用来检验evc计算中的重组能是否可靠。
 
 
 通过调用python脚本scr/get_transint.py，我们得到了传输积分数据VH.dat和VL.dat，用于后面的传输跳跃率计算。
@@ -248,13 +251,16 @@
 	do_transport_get_mob_MC           = 1        # 计算迁移率, 1表示开启，0表示关闭
 
 
-计算后得到不同近邻间 HOMO、LUMO 能级迁移速率，分别在文件 WH01.dat， WH02.dat，WL01.dat，WL02.dat 中。
+计算后得到不同近邻间 HOMO、LUMO 能级迁移速率，分别在文件 WH01.dat，WH02.dat，WL01.dat，WL02.dat 中。
 
 完成上述准备工作后，我们就可以进行 MC 模拟来计算电荷载流子迁移率。
 
 这一步也分为两部分，即prepare-mc.py和run_mc_batch.py。 第一部分是将得到的相关输入文件（如VH.dat、VL.dat、NM-e.dat NM-h.dat）复制到MC工作目录中，计算hopping rate。 第二部分是 MC 模拟。 当 MC 程序运行时，生成的记录行走轨迹的文件被写到相应目录中。 通常，2000 条随机行走轨迹将给出合理的迁移率的结果。
 
-在此步骤中，我们通常利用 OpenMP 做高速并行计算，它几乎与节点中的核数成线性比例关系。 例如，如果正在运行的节点有 28 个核，则运行速度是相应串行作业的 28 倍。
+.. important ::
+
+   	在此步骤中，我们通常利用 OpenMP 做高速并行计算，它几乎与节点中的核数成线性比例关系。 例如，如果正在运行的节点有 28 个核，则运行速度是相应串行作业的 28 倍。
+
 
 一旦 MC 模拟完成，我们就可以使用爱因斯坦关系从 MC 轨迹文件中计算随机游走迁移率。
 
@@ -318,5 +324,5 @@
 
 
 
-
+.. _Reference: https://pyminds.readthedocs.io/en/latest/autoapi/index.html
 .. _appendix: https://pyminds.readthedocs.io/en/latest/appendix.html
