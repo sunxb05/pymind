@@ -147,7 +147,7 @@ def fnacme(str):
     """
 
 def ftdipd(str):
-    """定义读取的DIP输出文件，用于Herzberg-Teller 效应的计算
+    """定义读取的 DIP 输出文件，用于 Herzberg-Teller 效应的计算
 
     Args:
         “numfreq-es.out” (Default)

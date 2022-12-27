@@ -128,7 +128,7 @@
 	  ratetype        = quantum                 # marcus or quantum，定义电子空穴迁移速率计算方法
 
 	  lat_cutoff      = 4                       # 计算相邻转移积分的截断半径(单位:Å)	
-      super-cell      = 4 4 4                   # Monte Carlo 模拟超胞大小的三维尺寸
+          super-cell      = 4 4 4                   # Monte Carlo 模拟超胞大小的三维尺寸
 
 	  nsimu           = 2000                    # 定义总模拟次数
 	  tsimu           = 1000                    # 定义总模拟时间（in ns）
@@ -196,11 +196,11 @@
     do_transport_submit_RE_job        = 1       # 计算重整能, 1表示开启，0表示关闭
 
 
-通过调用 scr 目录下的两个 python 脚本 mol_one.py 和 mol_two.py 来完成单分子单点能量计算和双分子单点能量计算。 这两个 python 脚本设置运行锁并提交传输积分计算的作业。
+通过调用 scr 目录下的两个 python 脚本 mol_one.py 和 mol_two.py 来完成单分子单点能量计算和双分子单点能量计算。这两个 python 脚本设置运行锁并提交传输积分计算的作业。
 当一个作业完成后，它会自动移除相应的锁。
 
 
-计算完成后会产生 Gaussian 计算得到的重整能和转移积分计算结果，文件存放在目录 ``RE/``n下的 log 和 fchk 文件中。其中 VH01.dat，VH02.dat，VL01.dat，VL02.dat 文件，可以得到 01、02 分子和 4 个近邻间的 HUMO 和 LOMO 能级的转移积分。同时在 ``transferintegral/`` 目录下得到不同分子与紧邻间的 HOMO 和 LUMO 能级的转移积分: 01/H.dat，01/L.dat，02/H.dat，02/L.dat。其中 01、02 表示第一、第二个分子。H和L分别代表HOMO和LUMO能级。
+计算完成后会产生 Gaussian 计算得到的重整能和转移积分计算结果，文件存放在目录 ``RE/`` 下的 log 和 fchk 文件中。其中 VH01.dat，VH02.dat，VL01.dat，VL02.dat 文件，可以得到 01、02 分子和 4 个近邻间的 HUMO 和 LOMO 能级的转移积分。同时在 ``transferintegral/`` 目录下得到不同分子与紧邻间的 HOMO 和 LUMO 能级的转移积分: 01/H.dat，01/L.dat，02/H.dat，02/L.dat。其中 01、02 表示第一、第二个分子。H和L分别代表HOMO和LUMO能级。
 
 
 当转移积分计算完成后，所有与转移积分计算相关的锁将被清除。 MOMAP将很快提交重组能量计算的作业。 与计算转移积分计算相比，此步骤需要更多时间才能完成。
@@ -208,7 +208,8 @@
 
 .. note ::
 
-	可以在此步骤中添加更多选项。例如，如果想利用优化好不带电分子结构作为初始结构来优化相应阴离子阳离子几何结构，可以将参数 RE_use_neutral_chk 设置为 1，即 ``RE_use_neutral_chk = 1``。
+	可以在此步骤中添加更多选项。例如，如果想利用已经优化的不带电分子结构作为初始结构来优化相应阴离子阳离子的几何结构，可以将参数 RE_use_neutral_chk 设置为 1，即 ``RE_use_neutral_chk = 1``。
+
 	另外，如果想利用Nelson四点法计算重组能，可以将参数RE_calc_lambda_4P设置为1，即 
 	``RE_calc_lambda_4P = 1`` ，该方法可以用来检验evc计算中的重组能是否可靠。
 
