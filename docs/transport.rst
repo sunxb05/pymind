@@ -146,7 +146,7 @@
 
 .. seealso ::
 
-	 对以上MOMAP输入变量的解释，请参考API Reference_ 部分.
+	 对以上MOMAP输入变量的解释，请参考API Reference_ 部分
 
 
 计算过程解释
@@ -169,11 +169,11 @@
 
 可以得到萘分子近邻文件: 
 
-* neighbor01.xyz，
-* neighbor02.xyz，
-* NEIGHBOR.dat，
-* SYS.dat，
-* 01/，
+* neighbor01.xyz
+* neighbor02.xyz
+* NEIGHBOR.dat
+* SYS.dat
+* 01/
 * 02/
 
 
@@ -182,7 +182,7 @@
 
 .. seealso ::
 
-	对生成的文件的详细解释，请参考附录 appendix_ 部分.
+	对生成的文件的详细解释，请参考附录 appendix_ 部分
 
 
 2. 计算转移积分和重整能
@@ -196,11 +196,11 @@
     do_transport_submit_RE_job        = 1       # 计算重整能, 1表示开启，0表示关闭
 
 
-通过调用scr目录下的两个python脚本mol_one.py和mol_two.py来完成单分子单点能量计算和双分子单点能量计算。 这两个 python 脚本设置运行锁并提交传输积分计算的作业。
+通过调用 scr 目录下的两个 python 脚本 mol_one.py 和 mol_two.py 来完成单分子单点能量计算和双分子单点能量计算。 这两个 python 脚本设置运行锁并提交传输积分计算的作业。
 当一个作业完成后，它会自动移除相应的锁。
 
 
-计算完成后会产生 Gaussian 计算得到的重整能和转移积分计算结果，文件存放在 目录 RE/下的 log 和 fchk 文件中。其中 VH01.dat，VH02.dat，VL01.dat，VL02.dat 文件，可以得到 01、02 分子和 4 个近邻间的 HUMO 和 LOMO 能级的转移积分。同时在 transferintegral/目录下得到不同分子与紧邻间的 HOMO 和 LUMO 能级的转移积 分:01/H.dat，01/L.dat，02/H.dat，02/L.dat。其中 01、02 表示第一、第二个分子。H和L分别代表HOMO和LUMO能级。
+计算完成后会产生 Gaussian 计算得到的重整能和转移积分计算结果，文件存放在目录 ``RE/``n下的 log 和 fchk 文件中。其中 VH01.dat，VH02.dat，VL01.dat，VL02.dat 文件，可以得到 01、02 分子和 4 个近邻间的 HUMO 和 LOMO 能级的转移积分。同时在 ``transferintegral/`` 目录下得到不同分子与紧邻间的 HOMO 和 LUMO 能级的转移积分: 01/H.dat，01/L.dat，02/H.dat，02/L.dat。其中 01、02 表示第一、第二个分子。H和L分别代表HOMO和LUMO能级。
 
 
 当转移积分计算完成后，所有与转移积分计算相关的锁将被清除。 MOMAP将很快提交重组能量计算的作业。 与计算转移积分计算相比，此步骤需要更多时间才能完成。
@@ -213,13 +213,13 @@
 	``RE_calc_lambda_4P = 1`` ，该方法可以用来检验evc计算中的重组能是否可靠。
 
 
-通过调用python脚本scr/get_transint.py，我们得到了传输积分数据VH.dat和VL.dat，用于后面的传输跳跃率计算。
+通过调用 python脚本 ``scr/get_transint.py``，我们得到了传输积分数据 VH.dat 和 VL.dat，用于后面的传输跳跃率计算。
 
-上述计算实际上使用了数据目录下的文件trans_int_files.dat 中列出的信息。 例如，trans_int_files.dat 的内容可能如下所示:
+上述计算实际上使用了数据目录下的文件 trans_int_files.dat 中列出的信息。 例如，trans_int_files.dat 的内容可能如下所示:
 
 .. image:: ./img/trans_int_files.png
 
-第一行包含晶胞中的分子数，然后是中心单元中每个分子的邻居数目，加上三文件组列表和两个分子的ID。 这些文件由 MOMAP可执行文件 transport_transferintegral.exe 使用。
+第一行包含晶胞中的分子数，然后是中心单元中每个分子的邻居数目，加上三文件组列表和两个分子的ID。 这些文件由 MOMAP 可执行文件 transport_transferintegral.exe 使用。
 
 
 3. 分析重整能
@@ -231,11 +231,11 @@
 	do_transport_get_re_evc           = 1       # 使用 evc 程序分析重整能, 1表示开启，0表示关闭
 
 
-在这一步中，我们将计算分为三步：prepare_RE.py、run_RE.py和get_RE.py。首先是准备输入文件，接着调用evc.exe进行实际计算，第三部分是收集计算结果.
+在这一步中，我们将计算分为三步：prepare_RE.py、run_RE.py 和 get_RE.py。首先是准备输入文件，接着调用 evc.exe 进行实际计算，第三部分是收集计算结果.
 
-在目录 evc/目录下文件 lamda.dat 存有电子和空穴重整能。其中 lam1 是指电 中性的分子处在平衡结构上和在带点结构上的能量之差。lam2 是指带电的离子 处在平衡结构和在电中性的分子上的能量之差。
+在目录 ``evc/`` 目录下文件 lamda.dat 存有电子和空穴重整能。其中 lam1 是指电 中性的分子处在平衡结构上和在带点结构上的能量之差。lam2 是指带电的离子 处在平衡结构和在电中性的分子上的能量之差。
 
-目录 evc/elec/下的 NM.dat 文件包含不同振动频率下的重整能和黄昆因子
+目录 ``evc/elec/`` 下的 NM.dat 文件包含不同振动频率下的重整能和黄昆因子
 
 
 
@@ -255,7 +255,7 @@
 
 完成上述准备工作后，我们就可以进行 MC 模拟来计算电荷载流子迁移率。
 
-这一步也分为两部分，即prepare-mc.py和run_mc_batch.py。 第一部分是将得到的相关输入文件（如VH.dat、VL.dat、NM-e.dat NM-h.dat）复制到MC工作目录中，计算hopping rate。 第二部分是 MC 模拟。 当 MC 程序运行时，生成的记录行走轨迹的文件被写到相应目录中。 通常，2000 条随机行走轨迹将给出合理的迁移率的结果。
+这一步也分为两部分，即 prepare-mc.py 和 run_mc_batch.py。 第一部分是将得到的相关输入文件（如VH.dat、VL.dat、NM-e.dat NM-h.dat）复制到 MC 工作目录中，计算 hopping rate。 第二部分是 MC 模拟。 当 MC 程序运行时，生成的记录行走轨迹的文件被写到相应目录中。 通常，2000 条随机行走轨迹将给出合理的迁移率的结果。
 
 .. important ::
 
@@ -276,7 +276,7 @@
 	do_transport_get_mob_MC_temp      = 1        # 计算不同温度下的迁移率, 1表示开启，0表示关闭
 
 
-计算得到的电子和空穴迁移率分别在目录 MC-quantu-temp(或者MC-marcus-temp)/下的 mob-e.dat 和 mob-h.dat 文件中。
+计算得到的电子和空穴迁移率分别在目录 MC-quantu-temp (或者 MC-marcus-temp) 下的 mob-e.dat 和 mob-h.dat 文件中。
 
 
 
@@ -315,7 +315,7 @@
 .. image:: ./img/plot_2.png
 
 
-此外，如果 numpy 和 matplotlib 安装，我们还可以使用生成的 python 脚本来显示电子迁移结果。 运行MC目录对应的python脚本为：mob_direction_all.py、mob_plane_xy.py、mob_plane_xz.py和mob_plane_yz.py。 例如，电子迁移的 3D 和 2D 图如下所示:
+此外，如果 numpy 和 matplotlib 已安装，我们还可以使用生成的 python 脚本来显示电子迁移结果。 运行MC目录对应的python脚本为：mob_direction_all.py、mob_plane_xy.py、mob_plane_xz.py 和 mob_plane_yz.py。 例如，电子迁移的 3D 和 2D 图如下所示:
 
 
 
