@@ -2,12 +2,12 @@
 发光部分
 *******
 
-“发光部分”分别以荧光和磷光的计算为例，详细介绍了分子的量化计算、 EVC(Electron-Vibration Coupling)振动分析、吸收光谱、辐射光谱、辐射速率、内转换速率、系间窜越速率的计算过程。另外，本文还详细介绍了态求和方法和 Herzberg-Teller效应的计算过程。
+“发光部分”分别以荧光和磷光的计算为例，详细介绍了分子的量化计算、 EVC(Electron-Vibration Coupling) 振动分析、吸收光谱、辐射光谱、辐射速率、内转换速率、系间窜越速率的计算过程。另外，本文还详细介绍了态求和方法和 Herzberg-Teller效应的计算过程。
  
 
 荧光
 ======
-吸收光谱、荧光光谱以及辐射速率的计算流程以 azulene 为例，算例数据位于 momap/example/azulene/目录下。
+吸收光谱、荧光光谱以及辐射速率的计算流程以 azulene 为例，算例数据位于 ``momap/example/azulene/`` 目录下。
 下图为 azulene 的结构示意图，由五元环和七 元环组成，其分子式为 C10H8。
 
 
@@ -22,7 +22,7 @@ a. 基态构型优化与频率计算
 ++++++++++++++++++++++
 
 
-本算例部分计算文件在 azulene/gaussian/目录下。Gaussian 使用方法详见 Gaussian 手册。
+本算例部分计算文件在 ``azulene/gaussian/`` 目录下。Gaussian 使用方法详见 Gaussian 手册。
 以下为使用Gaussian进行基态构型优化与频率计算的输入文件的例子：
 
 .. code-block:: bash
@@ -80,7 +80,7 @@ a. 基态构型优化与频率计算
 b. 激发态构型优化与频率计算
 +++++++++++++++++++++++++
 
-本部分计算文件在 azulene/gaussian/目录下。
+本部分计算文件在 ``azulene/gaussian/`` 目录下。
 基态 S0 构型优化完成后，使用 S0 优化后的构型作为激发态 S1 的初始构型， 用来优化激发态和计算激发态频率。
 
 
@@ -129,7 +129,7 @@ b. 激发态构型优化与频率计算
 2. 振动分析(EVC) 
 ---------------
 
-本部分计算文件在 azulene/evc/目录下。
+本部分计算文件在 ``azulene/evc/`` 目录下。
 
 
 收集以上计算得到的基态和激发态的计算结果文件，包括日志文件 (azulene-s0.log、azulene-s1.log)和格式化的 Checkpoint 文件(azulene-s0.fchk、 azulene-s1.fchk)，注意需保证振动结果无虚频(在频率计算文件中搜索 Frequencies，注意 F 大写，可以找到频率信息)，将这些文件都放在一个文件夹 (evc)中，编写 EVC 振动分析的输入文件 momap.inp:
@@ -206,7 +206,7 @@ a. 辐射速率输入文件 momap.inp:
 	 对以上MOMAP输入变量的解释，请参考API Reference_ 部分.
 
 
-把 momap.inp 文件、nodefile 文件和 4.1.2 部分计算得到的 evc.cart.dat 文件 放置于同一目录，运行以下命令进行计算:
+把 momap.inp 文件、nodefile 文件和 evc.cart.dat 文件放置于同一目录，运行以下命令进行计算:
 
 	``momap –input momap.inp –nodefile nodefile``
 
@@ -244,7 +244,7 @@ b. 计算结果解读:
 4. 非辐射速率
 ------------
 
-本部分计算文件在 azulene/kic/目录下。
+本部分计算文件在 ``azulene/kic/`` 目录下。
 
 计算内转换过程不仅需要分子基态 S0 与激发态 S1 的构型优化结果、频率计算结果，还需要包含与**非绝热耦合矩阵元相关的 azulene-nacme.log 文件**。非绝热 耦合计算时使用的计算方法、泛函等尽量与构型优化时保持一致。
 
@@ -320,7 +320,7 @@ d. 计算结果解读:
 
 磷光
 ======
-本部分以 Ir(ppy)3 为例，计算文件在 Irppy3/目录下。
+本部分以 Ir(ppy)3 为例，计算文件在 ``Irppy3/`` 目录下。
 
 .. image:: ./img/Irppy3.png
 
@@ -331,7 +331,7 @@ a. 基态构型优化与频率计算
 ++++++++++++++++++++++
 
 
-本算例部分计算文件在 Irppy3/gaussian/目录下。Gaussian 使用方法详见 Gaussian 手册。
+本算例部分计算文件在 ``Irppy3/gaussian/`` 目录下。Gaussian 使用方法详见 Gaussian 手册。
 以下为使用Gaussian进行基态构型优化与频率计算的输入文件的例子：
 
 .. code-block:: bash
@@ -422,7 +422,7 @@ a. 基态构型优化与频率计算
 b. 激发态构型优化与频率计算
 +++++++++++++++++++++++++
 
-本部分计算文件在 azulene/gaussian/目录下。
+本部分计算文件在 ``azulene/gaussian/`` 目录下。
 优化 Ir(ppy)3 分子基态 S0 构型并计算其频率。在基态 S0 最稳定构型下优化分子三重激发态 T1 的构型并计算其频率。
 
 
@@ -607,7 +607,7 @@ b. 计算结果解读:
 4. 非辐射速率
 ------------
 
-本部分计算文件在 Irppy3/kisc/目录下。
+本部分计算文件在 ``Irppy3/kisc/`` 目录下。
 
 计算系间窜越需要读取分子的自旋轨道耦合常数 Hso。本算例采用 Dalton 软件计算得到自旋轨道耦合常数 Hso 为 116.877376 cm-1。
 
@@ -642,7 +642,7 @@ b. 计算结果解读:
 
 态求和方法
 =========
-本部分以 azulene 为例，计算文件在 azulene/sum/目录下。
+本部分以 azulene 为例，计算文件在 ``azulene/sum/`` 目录下。
 态求和方法量化计算和 EVC 计算部分与关联函数方法相同。
 
 .. code-block:: bash
@@ -674,7 +674,7 @@ Herzberg-Teller 效应
 ========================
 
 本部分以 porphine 为例，计算文件在 porphine/目录下。
-一般当计算体系为弱发光体系或者柔性分子时，在计算过程中加入 HT 效应 会比较显著，是否考虑 Herzberg-Teller 效应需要根据用户理论知识和计算过程自 行决定，具体方法如下文所述。
+一般当计算体系为弱发光体系或者柔性分子时，在计算过程中加入HT效应会比较显著，是否考虑 Herzberg-Teller 效应需要根据用户理论知识和计算过程自行决定，具体方法如下文所述。
 
 .. image:: ./img/porphine.png
 
@@ -686,7 +686,7 @@ a. 基态构型优化与频率计算
 ++++++++++++++++++++++
 
 
-本部分计算文件在 porphine/gaussian/目录下。
+本部分计算文件在 ``porphine/gaussian/`` 目录下。
 以下为使用Gaussian进行基态构型优化与频率计算的输入文件的例子：
 
 .. code-block:: bash	
@@ -746,7 +746,7 @@ a. 基态构型优化与频率计算
 b. 激发态构型优化与频率计算
 +++++++++++++++++++++++++
 
-本部分计算文件在 porphine/gaussian/目录下。
+本部分计算文件在 ``porphine/gaussian/`` 目录下。
 激发态 s1 的输入文件如下：
 
 .. code-block:: bash
@@ -882,7 +882,7 @@ b. 激发态构型优化与频率计算
 3. 振动分析(EVC) 
 ---------------
 
-将 4.4.1 和 4.4.2 部分计算得到的 porphine-s0.log、porphine-s1.log、porphine-s0.fchk、porphine-s1.fchk 和 numfreq-es.out 文件放入 porphine/evc/目录下。构建 momap.inp 文件，evc 部分添加关键词:ftdipd = "numfreq-es.out"。如下 图所示:
+将以上计算得到的 porphine-s0.log、porphine-s1.log、porphine-s0.fchk、porphine-s1.fchk 和 numfreq-es.out 文件放入同一目录下。构建 momap.inp 文件，evc 部分添加关键词:ftdipd = "numfreq-es.out"。如下所示:
 
 .. code-block:: bash
 
@@ -904,7 +904,7 @@ b. 激发态构型优化与频率计算
 4. 辐射速率
 ----------
 
-本部分计算在 porphine/kr/目录下
+本部分计算在 ``porphine/kr/`` 目录下
 
 辐射速率输入文件 momap.inp:
 ++++++++++++++++++++++++++++
